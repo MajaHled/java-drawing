@@ -2,47 +2,84 @@ package cz.cuni.mff.java.hw.drawing;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 
-    private static PaintSettings settings = new PaintSettings();
+    private static final PaintSettings settings = new PaintSettings();
+
+    // Layout panels for settings
+    private static final JPanel leftMenu = new JPanel();
+    private static final JPanel colorPanel = new JPanel();
+    private static final JPanel shapePanel = new JPanel();
+    private static final JPanel penPanel = new JPanel();
+
+    // Buttons and ButtonGroups
+    private static final JButton selectMainColorButton = new JButton("Select main color...");
+    private static final JButton selectBackgroundColorButton = new JButton("Select background color...");
+    private static final ButtonGroup toolSelectionGroup = new ButtonGroup();
+    // TODO: make button subclass for pen and shapes
 
     private static void  createAndShowGUI() {
         JFrame f = new JFrame("Paint");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container pane = f.getContentPane();
-        pane.setLayout(new BorderLayout(1, 1));
+        f.setLayout(new BorderLayout(1, 1));
 
+        leftMenu.setLayout(new BoxLayout(leftMenu, BoxLayout.Y_AXIS));
+        f.add(leftMenu, BorderLayout.WEST);
+
+        // Drawing panel
         DrawPanel dp = new DrawPanel(settings);
-        pane.add(dp, BorderLayout.CENTER);
+        f.add(dp, BorderLayout.CENTER);
 
-        JButton selectMainColor = new JButton("Select main color...");
-        JButton selectBackgroundColor = new JButton("Select background color...");
-        selectMainColor.addActionListener(_ -> settings.mainColor = JColorChooser.showDialog(f, "Choose color", settings.mainColor));
-        selectBackgroundColor.addActionListener(_ -> settings.backgroundColor = JColorChooser.showDialog(f, "Choose color", settings.mainColor));
+        // Color selection
+        colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
+        colorPanel.setBorder(BorderFactory.createTitledBorder("Color Selection"));
 
+        selectMainColorButton.addActionListener(_ -> {
+            var color = JColorChooser.showDialog(f, "Choose main color", settings.mainColor);
+            if (color != null) {
+                settings.mainColor = color;
+                selectMainColorButton.setBackground(settings.mainColor);
+            }
+        });
+        selectMainColorButton.setBackground(settings.mainColor);
 
+        selectBackgroundColorButton.addActionListener(_ -> {
+            var color = JColorChooser.showDialog(f, "Choose background color", settings.backgroundColor);
+            if (color != null) {
+                settings.backgroundColor = color;
+                selectBackgroundColorButton.setBackground(settings.backgroundColor);
+            }
+        });
+        selectBackgroundColorButton.setBackground(settings.backgroundColor);
 
-        pane.add(selectMainColor, BorderLayout.WEST);
-        pane.add(selectBackgroundColor, BorderLayout.WEST);
+        colorPanel.add(selectMainColorButton);
+        colorPanel.add(selectBackgroundColorButton);
+        leftMenu.add(colorPanel);
+
+        // Shape selection
+        shapePanel.setBorder(BorderFactory.createTitledBorder("Shape Selection"));
+        // TODO
+        leftMenu.add(shapePanel);
+
+        // Pen selection
+        penPanel.setBorder(BorderFactory.createTitledBorder("Pen Selection"));
+        // TODO
+        leftMenu.add(penPanel);
 
         f.pack();
-        f.setSize(300, 300);
+        f.setSize(600, 300);
         f.setVisible(true);
     }
 }
 
-//TODO: have a settings object with stroke size, color etc, which may be ignored or used by pen and is set in the frame
 //Plan:
 // add buttons and selectors
-// add save and load
+// add save, load and new
 // add pen loading
 // add preset pens and test extra pens
 // add shape drawing
 // docs
-// add undo???

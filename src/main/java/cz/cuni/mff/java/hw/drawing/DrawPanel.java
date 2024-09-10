@@ -8,23 +8,23 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 public class DrawPanel extends JPanel {
-    private Pen CurrentPen;
     private BufferedImage img;
-    private PaintSettings Settings;
+    private PaintSettings settings;
 
     public DrawPanel(PaintSettings settings) {
-        CurrentPen = new TestPen();
         img = new BufferedImage(250, 250, BufferedImage.TYPE_3BYTE_BGR);
         var g = img.createGraphics();
-        Settings = settings;
+        this.settings = settings;
+        // TODO temp
+        settings.CurrentPen = new TestPen(settings, img.createGraphics());
 
-        g.setColor(Color.white);
+        g.setColor(settings.backgroundColor);
         g.fillRect(0, 0, img.getWidth(), img.getHeight());
 
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                CurrentPen.mouseDragged(e, img.createGraphics(), settings);
+                settings.CurrentPen.mouseDragged(e);
                 repaint();
             }
 
@@ -49,7 +49,7 @@ public class DrawPanel extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                CurrentPen.mouseReleased(e, img.createGraphics(), settings);
+                settings.CurrentPen.mouseReleased(e);
                 repaint();
             }
 
@@ -63,7 +63,6 @@ public class DrawPanel extends JPanel {
                 super.mouseClicked(e);
             }
         });
-
     }
 
     @Override
