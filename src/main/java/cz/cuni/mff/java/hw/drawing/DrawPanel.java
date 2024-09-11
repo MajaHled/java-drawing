@@ -80,7 +80,6 @@ public class DrawPanel extends JPanel {
             settings.currentPen.setGraphics(img.createGraphics());
         repaint();
     }
-
     public BufferedImage getImage() {
         return img;
     }

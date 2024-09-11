@@ -2,8 +2,8 @@ package cz.cuni.mff.java.hw.drawing;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.text.ParseException;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,6 +28,8 @@ public class Main {
     // Buttons and ButtonGroups
     private static final JButton selectMainColorButton = new JButton("Select main color...");
     private static final JButton selectBackgroundColorButton = new JButton("Select background color...");
+    private static final JSpinner strokeWidthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, null, 1));
+
     private static final ButtonGroup toolSelectionGroup = new ButtonGroup();
     // TODO: make button subclass for pen and shapes
 
@@ -83,6 +85,20 @@ public class Main {
         colorPanel.add(selectMainColorButton);
         colorPanel.add(selectBackgroundColorButton);
         leftMenu.add(colorPanel);
+
+        // Stroke selection
+        strokePanel.setBorder(BorderFactory.createTitledBorder("Width Selection"));
+        // Setting spinner size and edit settings
+        var editor = (JSpinner.DefaultEditor)strokeWidthSpinner.getEditor();
+        editor.setPreferredSize(new Dimension(30, editor.getPreferredSize().height));
+        editor.getTextField().setEditable(false); //TODO possibly just do input validation
+
+        strokeWidthSpinner.addChangeListener(_ -> {
+            penSettings.strokeWidth = (int) strokeWidthSpinner.getValue();
+        });
+
+        strokePanel.add(strokeWidthSpinner);
+        leftMenu.add(strokePanel);
 
         // Shape selection
         shapePanel.setBorder(BorderFactory.createTitledBorder("Shape Selection"));

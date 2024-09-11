@@ -32,9 +32,10 @@ public class TestPen implements Pen {
         checkReady();
 
         g.setColor(settings.mainColor);
+        g.setStroke(new BasicStroke(settings.strokeWidth));
 
         if (!started) {
-            g.drawRect(e.getX(), e.getY(), 1, 1);
+            g.drawLine(e.getX(), e.getY(), e.getX(), e.getY());
             started = true;
         } else {
             g.drawLine(lastX, lastY, e.getX(), e.getY());
@@ -66,7 +67,7 @@ public class TestPen implements Pen {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-    }
+    } // TODO draw also here
 
     @Override
     public void mouseReleased(MouseEvent e) {
