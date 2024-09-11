@@ -10,6 +10,8 @@ public class Main {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 
+    private static final JFrame f = new JFrame("Paint");
+
     // Settings classes
     private static final DrawPanelSettings panelSettings = new DrawPanelSettings();
     private static final PenSettings penSettings = new PenSettings();
@@ -47,18 +49,7 @@ public class Main {
     private static final JMenuItem saveAsItem = new JMenuItem("Save as...");
     // TODO add keyboard shortcuts
 
-    private static void  createAndShowGUI() {
-        JFrame f = new JFrame("Paint");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLayout(new BorderLayout(1, 1));
-
-        leftMenu.setLayout(new BoxLayout(leftMenu, BoxLayout.Y_AXIS));
-        f.add(leftMenu, BorderLayout.WEST);
-
-        // Drawing panel
-        f.add(dp, BorderLayout.CENTER);
-
-        // Color selection
+    private static void setupColorSelect() {
         colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
         colorPanel.setBorder(BorderFactory.createTitledBorder("Color Selection"));
 
@@ -85,9 +76,11 @@ public class Main {
         colorPanel.add(selectMainColorButton);
         colorPanel.add(selectBackgroundColorButton);
         leftMenu.add(colorPanel);
+    }
 
-        // Stroke selection
+    private static void setupStrokeSelect() {
         strokePanel.setBorder(BorderFactory.createTitledBorder("Width Selection"));
+
         // Setting spinner size and edit settings
         var editor = (JSpinner.DefaultEditor)strokeWidthSpinner.getEditor();
         editor.setPreferredSize(new Dimension(30, editor.getPreferredSize().height));
@@ -97,19 +90,17 @@ public class Main {
 
         strokePanel.add(strokeWidthSpinner);
         leftMenu.add(strokePanel);
+    }
 
-        // Pen buttons
-        penButtons.add(new PenButton(new TestPen(penSettings)));
-        penButtons.add(new PenButton(new RainbowPen(penSettings)));
-
+    private static void setupShapeButtons() {
+        // Create shape buttons
         shapePenButtons.add(new PenButton(new RectanglePen(penSettings)));
         shapePenButtons.add(new PenButton(new CirclePen(penSettings)));
         shapePenButtons.add(new PenButton(new LinePen(penSettings)));
-        // TODO: layout max two buttons in a row
 
-        // Shape selection
         shapePanel.setBorder(BorderFactory.createTitledBorder("Shape Selection"));
 
+        // Set up button actions and add to tool group
         for (var b : shapePenButtons) {
             b.addActionListener (_ -> {
                 panelSettings.currentPen.reset();
@@ -121,10 +112,17 @@ public class Main {
         }
 
         leftMenu.add(shapePanel);
+    }
 
-        // Pen selection
+    private static void setupPenButtons() {
+        // Create pen buttons
+        penButtons.add(new PenButton(new TestPen(penSettings)));
+        penButtons.add(new PenButton(new RainbowPen(penSettings)));
+        // TODO: layout max two buttons in a row
+
         penPanel.setBorder(BorderFactory.createTitledBorder("Pen Selection"));
 
+        // Set up button actions and add to tool group
         for (var b : penButtons) {
             b.addActionListener (_ -> {
                 panelSettings.currentPen.reset();
@@ -134,13 +132,11 @@ public class Main {
             toolSelectionGroup.add(b);
             penPanel.add(b);
         }
-        // Set starting pen
-        penButtons.getFirst().setSelected(true);
-        panelSettings.currentPen = penButtons.getFirst().pen;
 
         leftMenu.add(penPanel);
+    }
 
-        // Saving menu
+    private static void setupFileMenu() {
         menuBar.add(fileMenu);
         fileMenu.add(newItem);
         fileMenu.add(openItem);
@@ -189,6 +185,28 @@ public class Main {
                 }
             }
         });
+    }
+
+    private static void  createAndShowGUI() {
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Prepare layouts
+        f.setLayout(new BorderLayout(1, 1));
+        leftMenu.setLayout(new BoxLayout(leftMenu, BoxLayout.Y_AXIS));
+        f.add(leftMenu, BorderLayout.WEST);
+        f.add(dp, BorderLayout.CENTER);
+
+        // Setup of controls
+        setupColorSelect();
+        setupStrokeSelect();
+        setupShapeButtons();
+        setupPenButtons();
+
+        // Set starting pen
+        penButtons.getFirst().setSelected(true);
+        panelSettings.currentPen = penButtons.getFirst().pen;
+
+        setupFileMenu();
 
         f.pack();
         f.setSize(600, 300);
@@ -204,3 +222,4 @@ public class Main {
 // add preset pens and test extra pens
 // deal with resize better
 // docs
+// crlf
