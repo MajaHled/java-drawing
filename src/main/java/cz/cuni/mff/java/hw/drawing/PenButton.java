@@ -13,6 +13,7 @@ public class PenButton extends JToggleButton {
 
         Icon icon = pen.getPreferredIcon();
         if (icon != null) {
+            // TODO resize
             this.setIcon(icon);
         } else {
             int widthBackup = pen.settings.strokeWidth;

@@ -1,7 +1,6 @@
 package cz.cuni.mff.java.hw.drawing;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class RectanglePen extends ShapePen {
     @Override

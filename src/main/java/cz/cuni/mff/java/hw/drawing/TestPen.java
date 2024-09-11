@@ -1,6 +1,5 @@
 package cz.cuni.mff.java.hw.drawing;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;

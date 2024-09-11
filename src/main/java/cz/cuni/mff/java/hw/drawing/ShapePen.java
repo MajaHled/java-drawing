@@ -1,6 +1,5 @@
 package cz.cuni.mff.java.hw.drawing;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -19,7 +18,7 @@ public abstract class ShapePen extends Pen {
     protected abstract Shape getShape(int x1, int y1, int x2, int y2);
 
     @Override
-    public void mouseDragged(MouseEvent e, BufferedImage image) {
+    public final void mouseDragged(MouseEvent e, BufferedImage image) {
         if (started) {
             image.setData(origRaster);
             Graphics2D g = image.createGraphics();
@@ -31,7 +30,7 @@ public abstract class ShapePen extends Pen {
     }
 
     @Override
-    public void mousePressed(MouseEvent e, BufferedImage image) {
+    public final void mousePressed(MouseEvent e, BufferedImage image) {
         started = true;
         startX = e.getX();
         startY = e.getY();
@@ -39,7 +38,7 @@ public abstract class ShapePen extends Pen {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e, BufferedImage image) {
+    public final void mouseReleased(MouseEvent e, BufferedImage image) {
         started = false;
         startX = 0;
         startY = 0;
@@ -47,7 +46,7 @@ public abstract class ShapePen extends Pen {
     }
 
     @Override
-    public void reset() {
+    public final void reset() {
         started = false;
         startX = 0;
         startY = 0;

@@ -2,7 +2,6 @@ package cz.cuni.mff.java.hw.drawing;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
 
 public class CirclePen extends ShapePen {
     @Override
