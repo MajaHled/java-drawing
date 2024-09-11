@@ -10,9 +10,7 @@ public class LinePen extends ShapePen {
         return new Line2D.Float(x1, y1, x2, y2);
     }
 
-    public LinePen(PenSettings settings, BufferedImage image) {
-        super(settings, image);
+    public LinePen(PenSettings settings) {
+        super(settings);
     }
-
-    public LinePen() { }
 }

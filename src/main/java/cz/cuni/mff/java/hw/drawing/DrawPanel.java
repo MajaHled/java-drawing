@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class DrawPanel extends JPanel {
     private BufferedImage img;
-    private DrawPanelSettings settings;
+    private final DrawPanelSettings settings;
 
     public DrawPanel(DrawPanelSettings settings, BufferedImage image) {
         this.settings = settings;
@@ -18,13 +18,13 @@ public class DrawPanel extends JPanel {
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                settings.currentPen.mouseDragged(e);
+                settings.currentPen.mouseDragged(e, img);
                 repaint();
             }
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                settings.currentPen.mouseMoved(e);
+                settings.currentPen.mouseMoved(e, img);
                 repaint();
             }
         });
@@ -34,35 +34,35 @@ public class DrawPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                settings.currentPen.mouseExited(e);
+                settings.currentPen.mouseExited(e, img);
                 repaint();
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                settings.currentPen.mouseEntered(e);
+                settings.currentPen.mouseEntered(e, img);
                 repaint();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                settings.currentPen.mouseReleased(e);
+                settings.currentPen.mouseReleased(e, img);
                 repaint();
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                settings.currentPen.mousePressed(e);
+                settings.currentPen.mousePressed(e, img);
                 repaint();
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                settings.currentPen.mouseClicked(e);
+                settings.currentPen.mouseClicked(e, img);
                 repaint();
             }
         });
@@ -74,13 +74,11 @@ public class DrawPanel extends JPanel {
         g.drawImage(img, 0, 0, null);
     }
 
-    public void setImage(BufferedImage image) {
-        this.img = image;
-        if (settings.currentPen != null)
-            settings.currentPen.setImage(img);
-        repaint();
-    }
     public BufferedImage getImage() {
         return img;
+    }
+
+    public void setImage(BufferedImage image) {
+        this.img = image;
     }
 }

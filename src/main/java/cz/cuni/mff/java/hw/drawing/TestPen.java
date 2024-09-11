@@ -1,37 +1,22 @@
 package cz.cuni.mff.java.hw.drawing;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class TestPen implements Pen {
+public class TestPen extends Pen {
 
     private boolean started = false;
     private int lastX = 0;
     private int lastY = 0;
-    private PenSettings settings;
-    private BufferedImage image;
 
-    public TestPen(PenSettings settings, BufferedImage image) {
-        this.settings = settings;
-        this.image = image;
-    }
-
-    public TestPen() { }
-
-    private void checkReady() {
-        if (settings == null) {
-            throw new IllegalStateException("Settings have not been given, must call SetSettings method before use.");
-        }
-        if (image == null) {
-            throw new IllegalStateException("Image has not been given, must call SetImage method before use.");
-        }
+    public TestPen(PenSettings settings) {
+        super(settings);
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-        checkReady();
-
+    public void mouseDragged(MouseEvent e, BufferedImage image) {
         Graphics2D g = image.createGraphics();
         g.setColor(settings.mainColor);
         g.setStroke(new BasicStroke(settings.strokeWidth));
@@ -47,32 +32,12 @@ public class TestPen implements Pen {
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e, BufferedImage image) {
 
     } // TODO draw also here
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e, BufferedImage image) {
         started = false;
     }
 
@@ -81,15 +46,5 @@ public class TestPen implements Pen {
         started = false;
         lastX = 0;
         lastY = 0;
-    }
-
-    @Override
-    public void setSettings(PenSettings settings) {
-        this.settings = settings;
-    }
-
-    @Override
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 }

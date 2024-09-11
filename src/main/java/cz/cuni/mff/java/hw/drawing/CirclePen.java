@@ -10,9 +10,7 @@ public class CirclePen extends ShapePen {
         return new Ellipse2D.Float(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1-x2), Math.abs(y1-y2));
     }
 
-    public CirclePen(PenSettings settings, BufferedImage image) {
-        super(settings, image);
+    public CirclePen(PenSettings settings) {
+        super(settings);
     }
-
-    public CirclePen() { }
 }

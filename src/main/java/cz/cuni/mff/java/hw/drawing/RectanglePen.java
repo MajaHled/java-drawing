@@ -9,9 +9,7 @@ public class RectanglePen extends ShapePen {
         return new Rectangle(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1-x2), Math.abs(y1-y2));
     }
 
-    public RectanglePen(PenSettings settings, BufferedImage image) {
-        super(settings, image);
+    public RectanglePen(PenSettings settings) {
+        super(settings);
     }
-
-    public RectanglePen() { }
 }
