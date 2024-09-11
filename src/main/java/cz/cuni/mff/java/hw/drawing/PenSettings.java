@@ -17,4 +17,9 @@ public class PenSettings {
         this.backgroundColor = backgroundColor;
         this.strokeWidth = strokeWidth;
     }
+
+    public void setupGraphics2D(Graphics2D g) {
+        g.setColor(mainColor);
+        g.setStroke(new BasicStroke(strokeWidth, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
+    }
 }

@@ -80,6 +80,7 @@ public class DrawPanel extends JPanel {
 
     public void setImage(BufferedImage image) {
         this.img = image;
+        repaint();
     }
 
     public DrawPanelSettings getSettings() {

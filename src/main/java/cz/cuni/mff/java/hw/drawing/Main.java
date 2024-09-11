@@ -100,6 +100,7 @@ public class Main {
 
         // Pen buttons
         penButtons.add(new PenButton(new TestPen(penSettings)));
+        penButtons.add(new PenButton(new RainbowPen(penSettings)));
 
         shapePenButtons.add(new PenButton(new RectanglePen(penSettings)));
         shapePenButtons.add(new PenButton(new CirclePen(penSettings)));

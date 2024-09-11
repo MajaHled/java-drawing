@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 
 public abstract class ShapePen extends Pen {
-    private boolean started = false;
     private int startX = 0;
     private int startY = 0;
     private WritableRaster origRaster;
@@ -19,19 +18,17 @@ public abstract class ShapePen extends Pen {
 
     @Override
     public final void mouseDragged(MouseEvent e, BufferedImage image) {
-        if (started) {
+        if (origRaster != null)
             image.setData(origRaster);
-            Graphics2D g = image.createGraphics();
-            g.setColor(settings.mainColor);
-            g.setStroke(new BasicStroke(settings.strokeWidth));
 
-            g.draw(getShape(startX, startY, e.getX(), e.getY()));
-        }
+        Graphics2D g = image.createGraphics();
+        settings.setupGraphics2D(g);
+
+        g.draw(getShape(startX, startY, e.getX(), e.getY()));
     }
 
     @Override
     public final void mousePressed(MouseEvent e, BufferedImage image) {
-        started = true;
         startX = e.getX();
         startY = e.getY();
         origRaster = image.copyData(null);
@@ -39,7 +36,6 @@ public abstract class ShapePen extends Pen {
 
     @Override
     public final void mouseReleased(MouseEvent e, BufferedImage image) {
-        started = false;
         startX = 0;
         startY = 0;
         origRaster = null;
@@ -47,7 +43,6 @@ public abstract class ShapePen extends Pen {
 
     @Override
     public final void reset() {
-        started = false;
         startX = 0;
         startY = 0;
         origRaster = null;
