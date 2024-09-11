@@ -3,47 +3,36 @@ package cz.cuni.mff.java.hw.drawing;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 
-public class TestPen implements Pen {
-
+public abstract class ShapePen implements Pen {
     private boolean started = false;
-    private int lastX = 0;
-    private int lastY = 0;
+    private int startX = 0;
+    private int startY = 0;
     private PenSettings settings;
     private BufferedImage image;
+    private WritableRaster origRaster;
+    //TODO deal with unset image and settings, maybe think about subclass instead of interface
 
-    public TestPen(PenSettings settings, BufferedImage image) {
+    public ShapePen(PenSettings settings, BufferedImage image) {
         this.settings = settings;
         this.image = image;
     }
 
-    public TestPen() { }
+    public ShapePen() { }
 
-    private void checkReady() {
-        if (settings == null) {
-            throw new IllegalStateException("Settings have not been given, must call SetSettings method before use.");
-        }
-        if (image == null) {
-            throw new IllegalStateException("Image has not been given, must call SetImage method before use.");
-        }
-    }
+    protected abstract Shape getShape(int x1, int y1, int x2, int y2);
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        checkReady();
+        if (started) {
+            image.setData(origRaster);
+            Graphics2D g = image.createGraphics();
+            g.setColor(settings.mainColor);
+            g.setStroke(new BasicStroke(settings.strokeWidth));
 
-        Graphics2D g = image.createGraphics();
-        g.setColor(settings.mainColor);
-        g.setStroke(new BasicStroke(settings.strokeWidth));
-
-        if (!started) {
-            g.drawLine(e.getX(), e.getY(), e.getX(), e.getY());
-            started = true;
-        } else {
-            g.drawLine(lastX, lastY, e.getX(), e.getY());
+            g.draw(getShape(startX, startY, e.getX(), e.getY())); // TODO selection
         }
-        lastX = e.getX();
-        lastY = e.getY();
     }
 
     @Override
@@ -63,24 +52,31 @@ public class TestPen implements Pen {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        started = true;
+        startX = e.getX();
+        startY = e.getY();
+        origRaster = image.copyData(null);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
 
-    } // TODO draw also here
+    }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         started = false;
+        startX = 0;
+        startY = 0;
+        origRaster = null;
     }
 
     @Override
     public void reset() {
         started = false;
-        lastX = 0;
-        lastY = 0;
+        startX = 0;
+        startY = 0;
+        origRaster = null;
     }
 
     @Override

@@ -77,7 +77,7 @@ public class DrawPanel extends JPanel {
     public void setImage(BufferedImage image) {
         this.img = image;
         if (settings.currentPen != null)
-            settings.currentPen.setGraphics(img.createGraphics());
+            settings.currentPen.setImage(img);
         repaint();
     }
     public BufferedImage getImage() {

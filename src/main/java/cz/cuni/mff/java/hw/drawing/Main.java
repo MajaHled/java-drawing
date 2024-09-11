@@ -3,7 +3,6 @@ package cz.cuni.mff.java.hw.drawing;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.text.ParseException;
 
 public class Main {
     public static void main(String[] args) {
@@ -55,7 +54,7 @@ public class Main {
         f.add(leftMenu, BorderLayout.WEST);
 
         // Drawing panel
-        panelSettings.currentPen = new TestPen(penSettings, dp.getImage().createGraphics()); //TODO temp
+        panelSettings.currentPen = new CirclePen(penSettings, dp.getImage()); //TODO temp
         f.add(dp, BorderLayout.CENTER);
 
         // Color selection

@@ -1,7 +1,7 @@
 package cz.cuni.mff.java.hw.drawing;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 public interface Pen {
     // This is gonna have responses to mouse listener events from draw panel
@@ -15,5 +15,5 @@ public interface Pen {
 
     void reset();
     void setSettings(PenSettings settings);
-    void setGraphics(Graphics2D graphics);
+    void setImage(BufferedImage image);
 }
