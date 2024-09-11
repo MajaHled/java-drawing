@@ -2,6 +2,7 @@ package cz.cuni.mff.java.hw.drawing;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Main {
@@ -9,14 +10,18 @@ public class Main {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 
-    private static final PaintSettings settings = new PaintSettings();
+    // Settings classes
+    private static final DrawPanelSettings panelSettings = new DrawPanelSettings();
+    private static final PenSettings penSettings = new PenSettings();
 
     // Draw panel
-    private static final DrawPanel dp = new DrawPanel(settings);
+    private static final DrawPanel dp = new DrawPanel(panelSettings,
+            PictureLoader.NewImage(250, 250, panelSettings.backgroundColor));
 
     // Layout panels for settings
     private static final JPanel leftMenu = new JPanel();
     private static final JPanel colorPanel = new JPanel();
+    private static final JPanel strokePanel = new JPanel();
     private static final JPanel shapePanel = new JPanel();
     private static final JPanel penPanel = new JPanel();
 
@@ -37,6 +42,7 @@ public class Main {
     private static final JMenuItem openItem = new JMenuItem("Open...");
     private static final JMenuItem saveItem = new JMenuItem("Save...");
     private static final JMenuItem saveAsItem = new JMenuItem("Save as...");
+    // TODO add keyboard shortcuts
 
     private static void  createAndShowGUI() {
         JFrame f = new JFrame("Paint");
@@ -47,6 +53,7 @@ public class Main {
         f.add(leftMenu, BorderLayout.WEST);
 
         // Drawing panel
+        panelSettings.currentPen = new TestPen(penSettings, dp.getImage().createGraphics()); //TODO temp
         f.add(dp, BorderLayout.CENTER);
 
         // Color selection
@@ -54,22 +61,24 @@ public class Main {
         colorPanel.setBorder(BorderFactory.createTitledBorder("Color Selection"));
 
         selectMainColorButton.addActionListener(_ -> {
-            var color = JColorChooser.showDialog(f, "Choose main color", settings.mainColor);
+            var color = JColorChooser.showDialog(f, "Choose main color", panelSettings.mainColor);
             if (color != null) {
-                settings.mainColor = color;
-                selectMainColorButton.setBackground(settings.mainColor);
+                panelSettings.mainColor = color;
+                penSettings.mainColor = color;
+                selectMainColorButton.setBackground(panelSettings.mainColor);
             }
         });
-        selectMainColorButton.setBackground(settings.mainColor);
+        selectMainColorButton.setBackground(panelSettings.mainColor);
 
         selectBackgroundColorButton.addActionListener(_ -> {
-            var color = JColorChooser.showDialog(f, "Choose background color", settings.backgroundColor);
+            var color = JColorChooser.showDialog(f, "Choose background color", panelSettings.backgroundColor);
             if (color != null) {
-                settings.backgroundColor = color;
-                selectBackgroundColorButton.setBackground(settings.backgroundColor);
+                panelSettings.backgroundColor = color;
+                penSettings.backgroundColor = color;
+                selectBackgroundColorButton.setBackground(panelSettings.backgroundColor);
             }
         });
-        selectBackgroundColorButton.setBackground(settings.backgroundColor);
+        selectBackgroundColorButton.setBackground(panelSettings.backgroundColor);
 
         colorPanel.add(selectMainColorButton);
         colorPanel.add(selectBackgroundColorButton);
@@ -94,7 +103,7 @@ public class Main {
         f.setJMenuBar(menuBar);
 
         newItem.addActionListener(_ -> {
-            dp.NewImage(250, 250); // TODO dialog to choose
+            dp.setImage(PictureLoader.NewImage(250, 250, panelSettings.backgroundColor)); // TODO dialog to choose
             saveFile = null;
         });
 
@@ -102,20 +111,23 @@ public class Main {
             if (fileDialog.showOpenDialog(f) == JFileChooser.APPROVE_OPTION) {
                 File chosenFile = fileDialog.getSelectedFile();
                 if (chosenFile != null) {
-                    if (dp.LoadImage(chosenFile) == 0)
+                    var img = PictureLoader.LoadImage(chosenFile);
+                    if (img != null) {
+                        dp.setImage(img);
                         saveFile = chosenFile;
+                    }
                 }
             }
         });
 
         saveItem.addActionListener(_ -> {
             if (saveFile != null) {
-                dp.SaveImage(saveFile);
+                PictureLoader.SaveImage(dp.getImage(), saveFile); // TODO could be error here
             } else {
                 if (fileDialog.showOpenDialog(f) == JFileChooser.APPROVE_OPTION) {
                     File chosenFile = fileDialog.getSelectedFile();
                     if (chosenFile != null) {
-                        if (dp.SaveImage(chosenFile) == 0)
+                        if (PictureLoader.SaveImage(dp.getImage(), chosenFile) == 0)
                             saveFile = chosenFile;
                     }
                 }
@@ -126,7 +138,7 @@ public class Main {
             if (fileDialog.showOpenDialog(f) == JFileChooser.APPROVE_OPTION) {
                 File chosenFile = fileDialog.getSelectedFile();
                 if (chosenFile != null) {
-                    if (dp.SaveImage(chosenFile) == 0)
+                    if (PictureLoader.SaveImage(dp.getImage(), chosenFile) == 0)
                         saveFile = chosenFile;
                 }
             }

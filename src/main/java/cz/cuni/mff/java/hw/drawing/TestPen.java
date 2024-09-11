@@ -8,18 +8,18 @@ public class TestPen implements Pen {
     private boolean started = false;
     private int lastX = 0;
     private int lastY = 0;
-    private PaintSettings s;
+    private PenSettings settings;
     private Graphics2D g;
 
-    public TestPen(PaintSettings settings, Graphics2D graphics) {
-        s = settings;
+    public TestPen(PenSettings settings, Graphics2D graphics) {
+        this.settings = settings;
         g = graphics;
     }
 
     public TestPen() { }
 
     private void checkReady() {
-        if (s == null) {
+        if (settings == null) {
             throw new IllegalStateException("Settings have not been given, must call SetSettings method before use.");
         }
         if (g == null) {
@@ -31,7 +31,7 @@ public class TestPen implements Pen {
     public void mouseDragged(MouseEvent e) {
         checkReady();
 
-        g.setColor(s.mainColor);
+        g.setColor(settings.mainColor);
 
         if (!started) {
             g.drawRect(e.getX(), e.getY(), 1, 1);
@@ -44,24 +44,49 @@ public class TestPen implements Pen {
     }
 
     @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
     public void mouseReleased(MouseEvent e) {
         started = false;
     }
 
     @Override
-    public void Reset() {
+    public void reset() {
         started = false;
         lastX = 0;
         lastY = 0;
     }
 
     @Override
-    public void SetSettings(PaintSettings settings) {
-        s = settings;
+    public void setSettings(PenSettings settings) {
+        this.settings = settings;
     }
 
     @Override
-    public void SetGraphics(Graphics2D graphics) {
+    public void setGraphics(Graphics2D graphics) {
         g = graphics;
     }
 }
