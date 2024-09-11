@@ -104,6 +104,7 @@ public class Main {
         shapePenButtons.add(new PenButton(new RectanglePen(penSettings)));
         shapePenButtons.add(new PenButton(new CirclePen(penSettings)));
         shapePenButtons.add(new PenButton(new LinePen(penSettings)));
+        // TODO: layout max two buttons in a row
 
         // Shape selection
         shapePanel.setBorder(BorderFactory.createTitledBorder("Shape Selection"));

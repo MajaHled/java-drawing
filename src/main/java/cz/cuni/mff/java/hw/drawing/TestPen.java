@@ -16,7 +16,7 @@ public class TestPen extends Pen {
     }
 
     @Override
-    public void mouseDragged(MouseEvent e, BufferedImage image) {
+    public void mousePressed(MouseEvent e, BufferedImage image) {
         Graphics2D g = image.createGraphics();
         g.setColor(settings.mainColor);
         g.setStroke(new BasicStroke(settings.strokeWidth));
@@ -32,9 +32,20 @@ public class TestPen extends Pen {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e, BufferedImage image) {
+    public void mouseDragged(MouseEvent e, BufferedImage image) {
+        Graphics2D g = image.createGraphics();
+        g.setColor(settings.mainColor);
+        g.setStroke(new BasicStroke(settings.strokeWidth));
 
-    } // TODO draw also here
+        if (!started) {
+            g.drawLine(e.getX(), e.getY(), e.getX(), e.getY());
+            started = true;
+        } else {
+            g.drawLine(lastX, lastY, e.getX(), e.getY());
+        }
+        lastX = e.getX();
+        lastY = e.getY();
+    }
 
     @Override
     public void mouseReleased(MouseEvent e, BufferedImage image) {
