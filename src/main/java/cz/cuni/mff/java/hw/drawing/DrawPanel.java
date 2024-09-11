@@ -55,7 +55,7 @@ public class DrawPanel extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                settings.currentPen.mouseEntered(e);
+                settings.currentPen.mousePressed(e);
                 repaint();
             }
 
