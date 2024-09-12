@@ -28,11 +28,23 @@ public abstract class ShapePen extends Pen {
     }
 
     @Override
+    public final void mouseMoved(MouseEvent e, BufferedImage image) {}
+
+    @Override
+    public final void mouseExited(MouseEvent e, BufferedImage image) {}
+
+    @Override
+    public final void mouseEntered(MouseEvent e, BufferedImage image) {}
+
+    @Override
     public final void mousePressed(MouseEvent e, BufferedImage image) {
         startX = e.getX();
         startY = e.getY();
         origRaster = image.copyData(null);
     }
+
+    @Override
+    public final void mouseClicked(MouseEvent e, BufferedImage image) {}
 
     @Override
     public final void mouseReleased(MouseEvent e, BufferedImage image) {

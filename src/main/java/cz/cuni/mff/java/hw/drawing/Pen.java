@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public abstract class Pen {
-    protected PenSettings settings;
+    protected final PenSettings settings;
 
     public Pen(PenSettings settings) {
         this.settings = settings;

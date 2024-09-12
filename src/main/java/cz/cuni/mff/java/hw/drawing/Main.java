@@ -219,7 +219,7 @@ public class Main {
 // add save, load, new -> add save state to title and ask to override
 // deal with file extensions
 // add pen loading
-// add preset pens and test extra pens
+// make example plugins
 // deal with resize better
 // docs
 // crlf
