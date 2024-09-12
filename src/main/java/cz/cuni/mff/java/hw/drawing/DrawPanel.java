@@ -18,13 +18,15 @@ public class DrawPanel extends JPanel {
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                s.currentPen.mouseDragged(e, img);
+                if (s.currentPen != null)
+                    s.currentPen.mouseDragged(e, img);
                 repaint();
             }
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                s.currentPen.mouseMoved(e, img);
+                if (s.currentPen != null)
+                    s.currentPen.mouseMoved(e, img);
                 repaint();
             }
         });
@@ -34,35 +36,40 @@ public class DrawPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                s.currentPen.mouseExited(e, img);
+                if (s.currentPen != null)
+                    s.currentPen.mouseExited(e, img);
                 repaint();
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                s.currentPen.mouseEntered(e, img);
+                if (s.currentPen != null)
+                    s.currentPen.mouseEntered(e, img);
                 repaint();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                s.currentPen.mouseReleased(e, img);
+                if (s.currentPen != null)
+                    s.currentPen.mouseReleased(e, img);
                 repaint();
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                s.currentPen.mousePressed(e, img);
+                if (s.currentPen != null)
+                    s.currentPen.mousePressed(e, img);
                 repaint();
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                s.currentPen.mouseClicked(e, img);
+                if (s.currentPen != null)
+                    s.currentPen.mouseClicked(e, img);
                 repaint();
             }
         });

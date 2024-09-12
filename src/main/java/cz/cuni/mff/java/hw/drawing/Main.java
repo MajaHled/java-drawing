@@ -12,7 +12,7 @@ public class Main {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 
-    private static final JFrame f = new JFrame("Paint");
+    private static final JFrame f = new JFrame("Untitled*");
 
     // Settings classes
     private static final DrawPanelSettings panelSettings = new DrawPanelSettings();
@@ -62,14 +62,13 @@ public class Main {
         colorPanel.setBorder(BorderFactory.createTitledBorder("Color Selection"));
 
         selectMainColorButton.addActionListener(_ -> {
-            var color = JColorChooser.showDialog(f, "Choose main color", panelSettings.mainColor);
+            var color = JColorChooser.showDialog(f, "Choose main color", penSettings.mainColor);
             if (color != null) {
-                panelSettings.mainColor = color;
                 penSettings.mainColor = color;
-                selectMainColorButton.setBackground(panelSettings.mainColor);
+                selectMainColorButton.setBackground(color);
             }
         });
-        selectMainColorButton.setBackground(panelSettings.mainColor);
+        selectMainColorButton.setBackground(penSettings.mainColor);
 
         selectBackgroundColorButton.addActionListener(_ -> {
             var color = JColorChooser.showDialog(f, "Choose background color", panelSettings.backgroundColor);
@@ -152,7 +151,7 @@ public class Main {
         fileMenu.add(saveAsItem);
         f.setJMenuBar(menuBar);
 
-        fileDialog.setFileFilter(PictureLoader.GetFileExtentionFilter());
+        fileDialog.setFileFilter(PictureLoader.GetFileExtensionFilter());
 
         // Size picker for New... menu
         // Setup format of text fields
@@ -188,6 +187,7 @@ public class Main {
 
                 dp.setImage(PictureLoader.NewImage(x, y, panelSettings.backgroundColor));
                 saveFile = null;
+                f.setTitle("Untitled*");
             }
         });
 
@@ -199,33 +199,58 @@ public class Main {
                     if (img != null) {
                         dp.setImage(img);
                         saveFile = chosenFile;
+                        f.setTitle(saveFile.getName());
                     }
                 }
             }
         });
 
         saveItem.addActionListener(_ -> {
+            boolean saved = false;
             if (saveFile != null) {
-                PictureLoader.SaveImage(dp.getImage(), saveFile); // TODO could be error here
-            } else {
+                int ret_code = PictureLoader.SaveImage(dp.getImage(), saveFile);
+                if (ret_code == 0) {
+                    saved = true;
+                    f.setTitle(saveFile.getName());
+                }
+            }
+            if (!saved) {
                 if (fileDialog.showOpenDialog(f) == JFileChooser.APPROVE_OPTION) {
                     File chosenFile = fileDialog.getSelectedFile();
                     if (chosenFile != null) {
-                        if (PictureLoader.SaveImage(dp.getImage(), chosenFile) == 0)
+                        if (PictureLoader.SaveImage(dp.getImage(), chosenFile) == 0) {
                             saveFile = chosenFile;
+                            f.setTitle(saveFile.getName());
+                            saved = true;
+                        }
                     }
                 }
             }
+
+            if (!saved)
+                JOptionPane.showMessageDialog(f,
+                        "Could not save to file.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE);
         });
 
         saveAsItem.addActionListener(_ -> {
-            if (fileDialog.showOpenDialog(f) == JFileChooser.APPROVE_OPTION) {
+            boolean saved = false;
+            if (fileDialog.showSaveDialog(f) == JFileChooser.APPROVE_OPTION) {
                 File chosenFile = fileDialog.getSelectedFile();
                 if (chosenFile != null) {
-                    if (PictureLoader.SaveImage(dp.getImage(), chosenFile) == 0)
+                    if (PictureLoader.SaveImage(dp.getImage(), chosenFile) == 0) {
                         saveFile = chosenFile;
+                        f.setTitle(saveFile.getName());
+                        saved = true;
+                    }
                 }
             }
+            if (!saved)
+                JOptionPane.showMessageDialog(f,
+                        "Could not save to file.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE);
         });
     }
 
@@ -262,7 +287,6 @@ public class Main {
 }
 
 //Plan:
-// deal with file extensions
 // add pen loading
 // make example plugins
 // deal with resize better

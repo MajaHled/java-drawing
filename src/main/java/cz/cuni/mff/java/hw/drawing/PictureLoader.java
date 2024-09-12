@@ -6,8 +6,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PictureLoader {
+    private static final ArrayList<String> VALID_EXTS = new ArrayList<>(List.of(new String[]{"bmp", "gif", "jpeg", "jpg", "png"}));
     public static BufferedImage LoadImage(File imgFile) {
         if (imgFile.exists()) {
             try {
@@ -18,9 +21,15 @@ public class PictureLoader {
         }
         return null;
     }
+
     public static int SaveImage(BufferedImage img, File imgFile) {
         try {
-            ImageIO.write(img, "png", imgFile); // TODO: other formats
+            String filename = imgFile.getName();
+            String extension = filename.substring(filename.lastIndexOf(".")+1);
+            if (VALID_EXTS.contains(extension))
+                ImageIO.write(img, extension, imgFile);
+            else
+                ImageIO.write(img, "png", imgFile);
             return 0;
         } catch (IOException e) {
             return 1;
@@ -34,7 +43,7 @@ public class PictureLoader {
         return img;
     }
 
-    public static FileNameExtensionFilter GetFileExtentionFilter() {
+    public static FileNameExtensionFilter GetFileExtensionFilter() {
         return new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
     }
 }
