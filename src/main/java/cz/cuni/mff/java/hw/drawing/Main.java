@@ -1,8 +1,10 @@
 package cz.cuni.mff.java.hw.drawing;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Main {
@@ -36,9 +38,16 @@ public class Main {
     private static final ArrayList<PenButton> penButtons = new ArrayList<>();
     private static final ArrayList<PenButton> shapePenButtons = new ArrayList<>();
 
+    private static final JButton refreshButton = new JButton("Refresh");
+
     // File open and save options
     private static final JFileChooser fileDialog = new JFileChooser();
     private static File saveFile;
+
+    // Canvas size options window
+    private static final JPanel canvasSizeOptions = new JPanel();
+    private static JFormattedTextField xField;
+    private static JFormattedTextField yField;
 
     // Menu bar
     private static final JMenuBar menuBar = new JMenuBar();
@@ -47,7 +56,6 @@ public class Main {
     private static final JMenuItem openItem = new JMenuItem("Open...");
     private static final JMenuItem saveItem = new JMenuItem("Save...");
     private static final JMenuItem saveAsItem = new JMenuItem("Save as...");
-    // TODO add keyboard shortcuts
 
     private static void setupColorSelect() {
         colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
@@ -117,7 +125,7 @@ public class Main {
     private static void setupPenButtons() {
         // Create pen buttons
         penButtons.add(new PenButton(new TestPen(penSettings)));
-        penButtons.add(new PenButton(new RainbowPen(penSettings)));
+        //penButtons.add(new PenButton(new RainbowPen(penSettings)));
         // TODO: layout max two buttons in a row
 
         penPanel.setBorder(BorderFactory.createTitledBorder("Pen Selection"));
@@ -144,9 +152,43 @@ public class Main {
         fileMenu.add(saveAsItem);
         f.setJMenuBar(menuBar);
 
+        fileDialog.setFileFilter(PictureLoader.GetFileExtentionFilter());
+
+        // Size picker for New... menu
+        // Setup format of text fields
+        NumberFormatter formatter = new NumberFormatter(NumberFormat.getInstance());
+        formatter.setValueClass(Integer.class);
+        formatter.setMinimum(0);
+        formatter.setMaximum(Integer.MAX_VALUE);
+        formatter.setAllowsInvalid(false);
+
+        xField = new JFormattedTextField(formatter);
+        xField.setColumns(5);
+        xField.setText("250");
+        yField = new JFormattedTextField(formatter);
+        yField.setColumns(5);
+        yField.setText("250");
+
+        // Add textboxes
+        canvasSizeOptions.add(new JLabel("Width:"));
+        canvasSizeOptions.add(xField);
+        canvasSizeOptions.add(Box.createHorizontalStrut(15)); // a spacer
+        canvasSizeOptions.add(new JLabel("Height:"));
+        canvasSizeOptions.add(yField);
+
         newItem.addActionListener(_ -> {
-            dp.setImage(PictureLoader.NewImage(250, 250, panelSettings.backgroundColor)); // TODO dialog to choose
-            saveFile = null;
+            int result = JOptionPane.showConfirmDialog(null, canvasSizeOptions,
+                    "Please enter desired width and height", JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+                int x = 250, y = 250;
+                if (!xField.getText().isEmpty())
+                    x = Integer.parseInt(xField.getText());
+                if (!yField.getText().isEmpty())
+                    y = Integer.parseInt(yField.getText());
+
+                dp.setImage(PictureLoader.NewImage(x, y, panelSettings.backgroundColor));
+                saveFile = null;
+            }
         });
 
         openItem.addActionListener(_ -> {
@@ -199,6 +241,11 @@ public class Main {
         // Setup of controls
         setupColorSelect();
         setupStrokeSelect();
+
+        refreshButton.addActionListener(_ -> { // TODO plugins
+        });
+        leftMenu.add(refreshButton);
+
         setupShapeButtons();
         setupPenButtons();
 
@@ -213,10 +260,8 @@ public class Main {
         f.setVisible(true);
     }
 }
-// after break: add icons to pens
 
 //Plan:
-// add save, load, new -> add save state to title and ask to override
 // deal with file extensions
 // add pen loading
 // make example plugins

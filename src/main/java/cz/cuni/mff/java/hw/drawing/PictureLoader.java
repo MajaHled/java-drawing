@@ -1,6 +1,7 @@
 package cz.cuni.mff.java.hw.drawing;
 
 import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,7 +11,7 @@ public class PictureLoader {
     public static BufferedImage LoadImage(File imgFile) {
         if (imgFile.exists()) {
             try {
-                return ImageIO.read(imgFile); // TODO: other formats
+                return ImageIO.read(imgFile);
             } catch (IOException e) {
                 return null;
             }
@@ -31,5 +32,9 @@ public class PictureLoader {
         g.setColor(backgroundColor);
         g.fillRect(0, 0, img.getWidth(), img.getHeight());
         return img;
+    }
+
+    public static FileNameExtensionFilter GetFileExtentionFilter() {
+        return new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
     }
 }
