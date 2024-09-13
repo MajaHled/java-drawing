@@ -1,4 +1,4 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileNameExtensionFilter;

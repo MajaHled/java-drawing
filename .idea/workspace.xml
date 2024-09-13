@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Improve layouts">
+      <change afterPath="$PROJECT_DIR$/RainbowPlugin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/CirclePen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/DrawPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/DrawPanelSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/LinePen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/Pen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/PenButton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/PenSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/PictureLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/RainbowPen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/RectanglePen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/ShapePen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/TestPen.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MajaHled&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MajaHled/java-drawing.git&quot;,
+    &quot;accountId&quot;: &quot;da801597-e9c8-4db0-bfb5-765f941bfd37&quot;
+  }
+}</component>
+  <component name="MavenRunner">
+    <option name="jreName" value="22" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2lq4Tsjh94m7pHolO8izU8YmK3e" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Marie Hledíková/java/examles/java03/service-loader&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;debugger.hotswap&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="cz.cuni.mff.java.hw.drawing" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java\cz\cuni\mff\java\hw\drawing" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\RainbowPlugin\src\main\java\cz\cuni\mff\java\hw\drawing" />
+      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java\cz\cuni\mff\java\hw\drawing" />
+      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java" />
+      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\Plugins" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="" />
+      <created>1725894283690</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725894283690</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Add files">
+      <option name="closed" value="true" />
+      <created>1725971651206</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1725971651206</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add color select">
+      <option name="closed" value="true" />
+      <created>1726003509942</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726003509942</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add file operations">
+      <option name="closed" value="true" />
+      <created>1726010531509</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1726010531509</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Redo settings and file loading">
+      <option name="closed" value="true" />
+      <created>1726057983418</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1726057983418</updated>
+    </task>
+    <task id="LOCAL-00005" summary="bugfix">
+      <option name="closed" value="true" />
+      <created>1726058152391</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1726058152391</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add storke settings">
+      <option name="closed" value="true" />
+      <created>1726063910321</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1726063910321</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Implement Shape pens">
+      <option name="closed" value="true" />
+      <created>1726071646496</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726071646496</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Restructure pen inheritance">
+      <option name="closed" value="true" />
+      <created>1726087698640</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1726087698640</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Implement autoicons for pens">
+      <option name="closed" value="true" />
+      <created>1726088498823</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1726088498823</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Refactor">
+      <option name="closed" value="true" />
+      <created>1726089997448</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726089997448</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Implement rainbow pen">
+      <option name="closed" value="true" />
+      <created>1726095665735</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1726095665735</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Refactor main">
+      <option name="closed" value="true" />
+      <created>1726096792448</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1726096792448</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Refactor">
+      <option name="closed" value="true" />
+      <created>1726154677046</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1726154677046</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Add better file manipulation">
+      <option name="closed" value="true" />
+      <created>1726180052870</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1726180052870</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Implement better resize and adjust Pen API">
+      <option name="closed" value="true" />
+      <created>1726230167452</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1726230167452</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Improve layouts">
+      <option name="closed" value="true" />
+      <created>1726243399326</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1726243399326</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Add files" />
+    <MESSAGE value="Add color select" />
+    <MESSAGE value="Add file operations" />
+    <MESSAGE value="Redo settings and file loading" />
+    <MESSAGE value="bugfix" />
+    <MESSAGE value="Add storke settings" />
+    <MESSAGE value="Implement Shape pens" />
+    <MESSAGE value="Restructure pen inheritance" />
+    <MESSAGE value="Implement autoicons for pens" />
+    <MESSAGE value="Implement rainbow pen" />
+    <MESSAGE value="Refactor main" />
+    <MESSAGE value="Refactor" />
+    <MESSAGE value="Add better file manipulation" />
+    <MESSAGE value="Implement better resize and adjust Pen API" />
+    <MESSAGE value="Improve layouts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve layouts" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint type="java-exception">
+          <properties class="java.io.FileNotFoundException" package="java.io" />
+          <option name="timeStamp" value="40" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.NoSuchElementException" package="java.util" />
+          <option name="timeStamp" value="52" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

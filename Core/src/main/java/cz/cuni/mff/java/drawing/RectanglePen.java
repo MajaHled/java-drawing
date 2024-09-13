@@ -1,4 +1,4 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import java.awt.*;
 
@@ -10,5 +10,8 @@ public class RectanglePen extends ShapePen {
 
     public RectanglePen(PenSettings settings) {
         super(settings);
+    }
+    public RectanglePen() {
+        super();
     }
 }

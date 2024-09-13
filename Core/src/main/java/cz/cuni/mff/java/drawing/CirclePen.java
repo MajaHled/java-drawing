@@ -1,4 +1,4 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -11,5 +11,8 @@ public class CirclePen extends ShapePen {
 
     public CirclePen(PenSettings settings) {
         super(settings);
+    }
+    public CirclePen() {
+        super();
     }
 }

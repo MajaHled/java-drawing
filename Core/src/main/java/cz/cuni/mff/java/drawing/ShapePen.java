@@ -1,7 +1,6 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 
@@ -12,6 +11,9 @@ public abstract class ShapePen extends Pen {
 
     public ShapePen(PenSettings settings) {
         super(settings);
+    }
+    public ShapePen() {
+        super();
     }
 
     protected abstract Shape getShape(int x1, int y1, int x2, int y2);

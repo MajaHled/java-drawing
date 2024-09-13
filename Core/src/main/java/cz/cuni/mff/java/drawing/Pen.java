@@ -1,13 +1,22 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Pen {
-    protected final PenSettings settings;
+    protected PenSettings settings;
 
     public Pen(PenSettings settings) {
         this.settings = settings;
+    }
+    public Pen() {}
+
+    public final void setSettings(PenSettings settings) {
+        this.settings = settings;
+    }
+
+    public final boolean ready() {
+        return settings != null;
     }
 
     public void mouseDragged(int x, int y, BufferedImage image) {}

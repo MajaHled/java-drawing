@@ -1,4 +1,4 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,6 +9,10 @@ public class TestPen extends Pen {
 
     public TestPen(PenSettings settings) {
         super(settings);
+    }
+
+    public TestPen() {
+        super();
     }
 
     @Override

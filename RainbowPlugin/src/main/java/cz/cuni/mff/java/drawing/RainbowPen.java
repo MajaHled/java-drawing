@@ -1,15 +1,18 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import com.google.auto.service.AutoService;
+
+@AutoService(Pen.class)
 public class RainbowPen extends Pen {
     private int lastX = 0;
     private int lastY = 0;
     private float hue = 0;
 
-    public RainbowPen(PenSettings settings) {
-        super(settings);
+    public RainbowPen() {
+        super();
     }
 
     @Override

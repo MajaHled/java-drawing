@@ -1,18 +1,24 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
-import java.io.Console;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.ServiceLoader;
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
+
+    private static final File PLUGINS_DIR = new File("Plugins");
 
     private static final JFrame f = new JFrame("Untitled*");
 
@@ -38,7 +44,8 @@ public class Main {
     private static final JSpinner strokeWidthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, null, 1));
 
     private static final ButtonGroup toolSelectionGroup = new ButtonGroup();
-    private static final ArrayList<PenButton> penButtons = new ArrayList<>();
+    private static ArrayList<PenButton> penButtons = new ArrayList<>();
+    private static final ArrayList<PenButton> permanentPenButtons = new ArrayList<>();
     private static final ArrayList<PenButton> shapePenButtons = new ArrayList<>();
 
     private static final JButton refreshButton = new JButton("Refresh");
@@ -102,9 +109,10 @@ public class Main {
         leftMenu.add(strokePanel, gbc);
     }
 
-    private static void setupPenButtonPanel(JPanel buttonPanel, List<PenButton> buttons, String borderMessage, GridBagConstraints gbc) {
-        buttonPanel.setLayout(new GridLayout(Math.ceilDiv(buttons.size(),2), 2, 2, 2));
-        buttonPanel.setBorder(BorderFactory.createTitledBorder(borderMessage));
+    private static void displayButtons(JPanel buttonPanel, List<PenButton> buttons) {
+        for(Component c : buttonPanel.getComponents()) {
+            buttonPanel.remove(c);
+        }
 
         // Set up button actions and add to tool group
         for (var b : buttons) {
@@ -117,6 +125,16 @@ public class Main {
             toolSelectionGroup.add(b);
             buttonPanel.add(b);
         }
+
+        buttonPanel.revalidate();
+        buttonPanel.repaint();
+    }
+
+    private static void setupPenButtonPanel(JPanel buttonPanel, List<PenButton> buttons, String borderMessage, GridBagConstraints gbc) {
+        buttonPanel.setLayout(new GridLayout(Math.ceilDiv(buttons.size(),2), 2, 2, 2));
+        buttonPanel.setBorder(BorderFactory.createTitledBorder(borderMessage));
+
+        displayButtons(buttonPanel, buttons);
 
         leftMenu.add(buttonPanel, gbc);
     }
@@ -132,9 +150,10 @@ public class Main {
 
     private static void setupPenButtons(GridBagConstraints gbc) {
         // Create pen buttons
-        penButtons.add(new PenButton(new TestPen(penSettings)));
-        penButtons.add(new PenButton(new RainbowPen(penSettings)));
+        permanentPenButtons.add(new PenButton(new TestPen(penSettings)));
+        //permanentPenButtons.add(new PenButton(new RainbowPen(penSettings)));
 
+        refreshPlugins();
         setupPenButtonPanel(penPanel, penButtons, "Pen Selection", gbc);
     }
 
@@ -249,6 +268,34 @@ public class Main {
         });
     }
 
+    private static void refreshPlugins() {
+        try {
+            // Reset buttons to default state
+            penButtons = new ArrayList<>(permanentPenButtons);
+
+            // Get URLs of all files in PLUGINS_DIR
+            ArrayList<URL> urls = new ArrayList<>();
+            for (File file : Objects.requireNonNull(PLUGINS_DIR.listFiles())) {
+                urls.add(file.toURI().toURL());
+            }
+
+            // Get a classloader for all the loaded URLs
+            URL[] array = new URL[urls.size()];
+            urls.toArray(array);
+            URLClassLoader loader = new URLClassLoader(array);
+
+            // Use the classloader in ServiceLoader to load all appropriate jars
+            ServiceLoader<Pen> sl = ServiceLoader.load(Pen.class, loader);
+
+            for (Pen plugin : sl) {
+                plugin.setSettings(penSettings);
+                penButtons.add(new PenButton(plugin));
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static void  createAndShowGUI() {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -267,7 +314,13 @@ public class Main {
         gbc.gridy = 1;
         setupStrokeSelect(gbc);
 
-        refreshButton.addActionListener(_ -> { // TODO plugins
+        refreshButton.addActionListener(_ -> {
+            if (PLUGINS_DIR.exists() && PLUGINS_DIR.isDirectory()) {
+                refreshPlugins();
+                displayButtons(penPanel, penButtons);
+            } else {
+                //TODO deal
+            }
         });
         gbc.gridy = 2;
         leftMenu.add(refreshButton, gbc);

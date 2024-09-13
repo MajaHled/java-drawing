@@ -1,4 +1,4 @@
-package cz.cuni.mff.java.hw.drawing;
+package cz.cuni.mff.java.drawing;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
@@ -11,5 +11,8 @@ public class LinePen extends ShapePen {
 
     public LinePen(PenSettings settings) {
         super(settings);
+    }
+    public LinePen() {
+        super();
     }
 }
