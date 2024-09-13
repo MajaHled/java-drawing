@@ -20,10 +20,10 @@ public class PenButton extends JToggleButton {
             pen.settings.strokeWidth = 3;
 
             var img = PictureLoader.NewImage(30, 30, Color.WHITE);
-            pen.mousePressed(new MouseEvent(this, 0, 0, 0, 5, 5, 1, false), img); // TODO put this in docs for sure
-            pen.mouseDragged(new MouseEvent(this, 0, 0, 0, 15, 15, 1, false), img);
-            pen.mouseDragged(new MouseEvent(this, 0, 0, 0, 25, 25, 1, false), img);
-            pen.mouseReleased(new MouseEvent(this, 0, 0, 0, 25, 25, 1, false), img);
+            pen.mousePressed(5, 5, img); // TODO put this in docs for sure
+            pen.mouseDragged(15, 15, img);
+            pen.mouseDragged(25, 25, img);
+            pen.mouseReleased(25, 25, img);
 
             this.setIcon(new ImageIcon(img));
 

@@ -10,23 +10,26 @@ import java.awt.image.BufferedImage;
 public class DrawPanel extends JPanel {
     private BufferedImage img;
     private final DrawPanelSettings s;
-
+    private JScrollPane scrollPane;
+    
+    private int imgStartX = 0, imgStartY = 0;
+    
     public DrawPanel(DrawPanelSettings settings, BufferedImage image) {
         this.s = settings;
-        this.img = image;
+        this.setImage(image);
 
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (s.currentPen != null)
-                    s.currentPen.mouseDragged(e, img);
+                    s.currentPen.mouseDragged(transformX(e.getX()), transformY(e.getY()),  img);
                 repaint();
             }
 
             @Override
             public void mouseMoved(MouseEvent e) {
                 if (s.currentPen != null)
-                    s.currentPen.mouseMoved(e, img);
+                    s.currentPen.mouseMoved(transformX(e.getX()), transformY(e.getY()),  img);
                 repaint();
             }
         });
@@ -37,7 +40,7 @@ public class DrawPanel extends JPanel {
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
                 if (s.currentPen != null)
-                    s.currentPen.mouseExited(e, img);
+                    s.currentPen.mouseExited(transformX(e.getX()), transformY(e.getY()),  img);
                 repaint();
             }
 
@@ -45,7 +48,7 @@ public class DrawPanel extends JPanel {
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
                 if (s.currentPen != null)
-                    s.currentPen.mouseEntered(e, img);
+                    s.currentPen.mouseEntered(transformX(e.getX()), transformY(e.getY()),  img);
                 repaint();
             }
 
@@ -53,7 +56,7 @@ public class DrawPanel extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 if (s.currentPen != null)
-                    s.currentPen.mouseReleased(e, img);
+                    s.currentPen.mouseReleased(transformX(e.getX()), transformY(e.getY()),  img);
                 repaint();
             }
 
@@ -61,7 +64,7 @@ public class DrawPanel extends JPanel {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 if (s.currentPen != null)
-                    s.currentPen.mousePressed(e, img);
+                    s.currentPen.mousePressed(transformX(e.getX()), transformY(e.getY()),  img);
                 repaint();
             }
 
@@ -69,16 +72,33 @@ public class DrawPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (s.currentPen != null)
-                    s.currentPen.mouseClicked(e, img);
+                    s.currentPen.mouseClicked(transformX(e.getX()), transformY(e.getY()),  img);
                 repaint();
             }
         });
     }
+    
+    private int transformX(int x) {
+        return x - imgStartX;
+    }
 
+    private int transformY(int y) {
+        return y - imgStartY;
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, null);
+
+        // If the image is smaller than the panel area, center
+        imgStartX = Math.max(0, (this.getWidth() - img.getWidth()) / 2);
+        imgStartY = Math.max(0, (this.getHeight() - img.getHeight()) / 2);
+        g.drawImage(img, imgStartX, imgStartY, null);
+    }
+
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+        scrollPane.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
     }
 
     public BufferedImage getImage() {
@@ -87,6 +107,9 @@ public class DrawPanel extends JPanel {
 
     public void setImage(BufferedImage image) {
         this.img = image;
+        this.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
+        if (scrollPane != null)
+            scrollPane.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
         repaint();
     }
 

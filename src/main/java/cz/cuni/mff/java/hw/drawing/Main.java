@@ -21,6 +21,7 @@ public class Main {
     // Draw panel
     private static final DrawPanel dp = new DrawPanel(panelSettings,
             PictureLoader.NewImage(250, 250, panelSettings.backgroundColor));
+    private static final JScrollPane scrollPaneDP = new JScrollPane(dp);
 
     // Layout panels for settings
     private static final JPanel leftMenu = new JPanel();
@@ -91,7 +92,7 @@ public class Main {
         // Setting spinner size and edit settings
         var editor = (JSpinner.DefaultEditor)strokeWidthSpinner.getEditor();
         editor.setPreferredSize(new Dimension(30, editor.getPreferredSize().height));
-        editor.getTextField().setEditable(false); //TODO possibly just do input validation
+        editor.getTextField().setEditable(false);
 
         strokeWidthSpinner.addChangeListener(_ -> penSettings.strokeWidth = (int) strokeWidthSpinner.getValue());
 
@@ -261,7 +262,8 @@ public class Main {
         f.setLayout(new BorderLayout(1, 1));
         leftMenu.setLayout(new BoxLayout(leftMenu, BoxLayout.Y_AXIS));
         f.add(leftMenu, BorderLayout.WEST);
-        f.add(dp, BorderLayout.CENTER);
+        dp.setScrollPane(scrollPaneDP);
+        f.add(scrollPaneDP, BorderLayout.CENTER);
 
         // Setup of controls
         setupColorSelect();
@@ -289,6 +291,5 @@ public class Main {
 //Plan:
 // add pen loading
 // make example plugins
-// deal with resize better
+// Saving better and better size dialog
 // docs
-// crlf

@@ -17,37 +17,37 @@ public abstract class ShapePen extends Pen {
     protected abstract Shape getShape(int x1, int y1, int x2, int y2);
 
     @Override
-    public final void mouseDragged(MouseEvent e, BufferedImage image) {
+    public final void mouseDragged(int x, int y, BufferedImage image) {
         if (origRaster != null)
             image.setData(origRaster);
 
         Graphics2D g = image.createGraphics();
         settings.setupGraphics2D(g);
 
-        g.draw(getShape(startX, startY, e.getX(), e.getY()));
+        g.draw(getShape(startX, startY, x, y));
     }
 
     @Override
-    public final void mouseMoved(MouseEvent e, BufferedImage image) {}
+    public final void mouseMoved(int x, int y, BufferedImage image) {}
 
     @Override
-    public final void mouseExited(MouseEvent e, BufferedImage image) {}
+    public final void mouseExited(int x, int y, BufferedImage image) {}
 
     @Override
-    public final void mouseEntered(MouseEvent e, BufferedImage image) {}
+    public final void mouseEntered(int x, int y, BufferedImage image) {}
 
     @Override
-    public final void mousePressed(MouseEvent e, BufferedImage image) {
-        startX = e.getX();
-        startY = e.getY();
+    public final void mousePressed(int x, int y, BufferedImage image) {
+        startX = x;
+        startY = y;
         origRaster = image.copyData(null);
     }
 
     @Override
-    public final void mouseClicked(MouseEvent e, BufferedImage image) {}
+    public final void mouseClicked(int x, int y, BufferedImage image) {}
 
     @Override
-    public final void mouseReleased(MouseEvent e, BufferedImage image) {
+    public final void mouseReleased(int x, int y, BufferedImage image) {
         startX = 0;
         startY = 0;
         origRaster = null;

@@ -1,7 +1,6 @@
 package cz.cuni.mff.java.hw.drawing;
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public abstract class Pen {
@@ -11,13 +10,13 @@ public abstract class Pen {
         this.settings = settings;
     }
 
-    public void mouseDragged(MouseEvent e, BufferedImage image) {}
-    public void mouseMoved(MouseEvent e, BufferedImage image) {}
-    public void mouseExited(MouseEvent e, BufferedImage image) {}
-    public void mouseEntered(MouseEvent e, BufferedImage image) {}
-    public void mousePressed(MouseEvent e, BufferedImage image) {}
-    public void mouseClicked(MouseEvent e, BufferedImage image) {}
-    public void mouseReleased(MouseEvent e, BufferedImage image) {}
+    public void mouseDragged(int x, int y, BufferedImage image) {}
+    public void mouseMoved(int x, int y, BufferedImage image) {}
+    public void mouseExited(int x, int y, BufferedImage image) {}
+    public void mouseEntered(int x, int y, BufferedImage image) {}
+    public void mousePressed(int x, int y, BufferedImage image) {}
+    public void mouseClicked(int x, int y, BufferedImage image) {}
+    public void mouseReleased(int x, int y, BufferedImage image) {}
 
     public void reset() {}
 
