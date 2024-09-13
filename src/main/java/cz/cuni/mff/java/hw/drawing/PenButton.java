@@ -2,10 +2,10 @@ package cz.cuni.mff.java.hw.drawing;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public class PenButton extends JToggleButton {
     public final Pen pen;
+    private static final int ICON_SIZE = 40;
 
     public PenButton(Pen pen) {
         super();
@@ -19,15 +19,22 @@ public class PenButton extends JToggleButton {
             int widthBackup = pen.settings.strokeWidth;
             pen.settings.strokeWidth = 3;
 
-            var img = PictureLoader.NewImage(30, 30, Color.WHITE);
+            var img = PictureLoader.NewImage(ICON_SIZE, ICON_SIZE, Color.WHITE);
+
             pen.mousePressed(5, 5, img); // TODO put this in docs for sure
-            pen.mouseDragged(15, 15, img);
-            pen.mouseDragged(25, 25, img);
-            pen.mouseReleased(25, 25, img);
+            for (int i = 6; i <= ICON_SIZE - 5; i += 2) {
+                pen.mouseDragged(i, i, img);
+            }
+
+            pen.mouseReleased(ICON_SIZE - 5, ICON_SIZE - 5, img);
 
             this.setIcon(new ImageIcon(img));
 
             pen.settings.strokeWidth = widthBackup;
         }
+    }
+
+    public int getIconSize() {
+        return ICON_SIZE;
     }
 }

@@ -3,9 +3,11 @@ package cz.cuni.mff.java.hw.drawing;
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
+import java.io.Console;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,8 +33,8 @@ public class Main {
     private static final JPanel penPanel = new JPanel();
 
     // Buttons and ButtonGroups
-    private static final JButton selectMainColorButton = new JButton("Select main color...");
-    private static final JButton selectBackgroundColorButton = new JButton("Select background color...");
+    private static final JButton selectMainColorButton = new JButton("Main color..");
+    private static final JButton selectBackgroundColorButton = new JButton("Back color..");
     private static final JSpinner strokeWidthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, null, 1));
 
     private static final ButtonGroup toolSelectionGroup = new ButtonGroup();
@@ -58,7 +60,7 @@ public class Main {
     private static final JMenuItem saveItem = new JMenuItem("Save...");
     private static final JMenuItem saveAsItem = new JMenuItem("Save as...");
 
-    private static void setupColorSelect() {
+    private static void setupColorSelect(GridBagConstraints gbc) {
         colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
         colorPanel.setBorder(BorderFactory.createTitledBorder("Color Selection"));
 
@@ -83,65 +85,57 @@ public class Main {
 
         colorPanel.add(selectMainColorButton);
         colorPanel.add(selectBackgroundColorButton);
-        leftMenu.add(colorPanel);
+        leftMenu.add(colorPanel, gbc);
     }
 
-    private static void setupStrokeSelect() {
+    private static void setupStrokeSelect(GridBagConstraints gbc) {
         strokePanel.setBorder(BorderFactory.createTitledBorder("Width Selection"));
 
         // Setting spinner size and edit settings
         var editor = (JSpinner.DefaultEditor)strokeWidthSpinner.getEditor();
-        editor.setPreferredSize(new Dimension(30, editor.getPreferredSize().height));
+        editor.setPreferredSize(new Dimension(73, editor.getPreferredSize().height));
         editor.getTextField().setEditable(false);
 
         strokeWidthSpinner.addChangeListener(_ -> penSettings.strokeWidth = (int) strokeWidthSpinner.getValue());
 
         strokePanel.add(strokeWidthSpinner);
-        leftMenu.add(strokePanel);
+        leftMenu.add(strokePanel, gbc);
     }
 
-    private static void setupShapeButtons() {
+    private static void setupPenButtonPanel(JPanel buttonPanel, List<PenButton> buttons, String borderMessage, GridBagConstraints gbc) {
+        buttonPanel.setLayout(new GridLayout(Math.ceilDiv(buttons.size(),2), 2, 2, 2));
+        buttonPanel.setBorder(BorderFactory.createTitledBorder(borderMessage));
+
+        // Set up button actions and add to tool group
+        for (var b : buttons) {
+            b.setPreferredSize(new Dimension(b.getIconSize()+10, b.getIconSize()+10));
+            b.addActionListener (_ -> {
+                panelSettings.currentPen.reset();
+                panelSettings.currentPen = b.pen;
+                b.pen.reset();
+            });
+            toolSelectionGroup.add(b);
+            buttonPanel.add(b);
+        }
+
+        leftMenu.add(buttonPanel, gbc);
+    }
+
+    private static void setupShapeButtons(GridBagConstraints gbc) {
         // Create shape buttons
         shapePenButtons.add(new PenButton(new RectanglePen(penSettings)));
         shapePenButtons.add(new PenButton(new CirclePen(penSettings)));
         shapePenButtons.add(new PenButton(new LinePen(penSettings)));
 
-        shapePanel.setBorder(BorderFactory.createTitledBorder("Shape Selection"));
-
-        // Set up button actions and add to tool group
-        for (var b : shapePenButtons) {
-            b.addActionListener (_ -> {
-                panelSettings.currentPen.reset();
-                panelSettings.currentPen = b.pen;
-                b.pen.reset();
-            });
-            toolSelectionGroup.add(b);
-            shapePanel.add(b);
-        }
-
-        leftMenu.add(shapePanel);
+        setupPenButtonPanel(shapePanel, shapePenButtons, "Shape Selection", gbc);
     }
 
-    private static void setupPenButtons() {
+    private static void setupPenButtons(GridBagConstraints gbc) {
         // Create pen buttons
         penButtons.add(new PenButton(new TestPen(penSettings)));
-        //penButtons.add(new PenButton(new RainbowPen(penSettings)));
-        // TODO: layout max two buttons in a row
+        penButtons.add(new PenButton(new RainbowPen(penSettings)));
 
-        penPanel.setBorder(BorderFactory.createTitledBorder("Pen Selection"));
-
-        // Set up button actions and add to tool group
-        for (var b : penButtons) {
-            b.addActionListener (_ -> {
-                panelSettings.currentPen.reset();
-                panelSettings.currentPen = b.pen;
-                b.pen.reset();
-            });
-            toolSelectionGroup.add(b);
-            penPanel.add(b);
-        }
-
-        leftMenu.add(penPanel);
+        setupPenButtonPanel(penPanel, penButtons, "Pen Selection", gbc);
     }
 
     private static void setupFileMenu() {
@@ -260,21 +254,28 @@ public class Main {
 
         // Prepare layouts
         f.setLayout(new BorderLayout(1, 1));
-        leftMenu.setLayout(new BoxLayout(leftMenu, BoxLayout.Y_AXIS));
-        f.add(leftMenu, BorderLayout.WEST);
         dp.setScrollPane(scrollPaneDP);
         f.add(scrollPaneDP, BorderLayout.CENTER);
 
+        leftMenu.setLayout(new GridBagLayout());
+
         // Setup of controls
-        setupColorSelect();
-        setupStrokeSelect();
+        var gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        setupColorSelect(gbc);
+        gbc.gridy = 1;
+        setupStrokeSelect(gbc);
 
         refreshButton.addActionListener(_ -> { // TODO plugins
         });
-        leftMenu.add(refreshButton);
+        gbc.gridy = 2;
+        leftMenu.add(refreshButton, gbc);
 
-        setupShapeButtons();
-        setupPenButtons();
+        gbc.gridy = 3;
+        setupShapeButtons(gbc);
+        gbc.gridy = 4;
+        setupPenButtons(gbc);
 
         // Set starting pen
         penButtons.getFirst().setSelected(true);
@@ -282,8 +283,10 @@ public class Main {
 
         setupFileMenu();
 
+        f.add(new JScrollPane(leftMenu), BorderLayout.WEST);
+
         f.pack();
-        f.setSize(600, 300);
+        f.setSize(600, 500);
         f.setVisible(true);
     }
 }
@@ -292,4 +295,5 @@ public class Main {
 // add pen loading
 // make example plugins
 // Saving better and better size dialog
+// fix layouts
 // docs
