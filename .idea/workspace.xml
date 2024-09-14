@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Implement plugins + refactor">
-      <change afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WavePlugin/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WavePlugin/src/main/java/cz/cuni/mff/java/drawing/WavePen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Move tool button setup to internal class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/RainbowPlugin-1.0-SNAPSHOT.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +56,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Debug",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
@@ -231,7 +228,23 @@
       <option name="project" value="LOCAL" />
       <updated>1726256486011</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Move plugin loading to own class">
+      <option name="closed" value="true" />
+      <created>1726307669819</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1726307669819</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Move tool button setup to internal class">
+      <option name="closed" value="true" />
+      <created>1726308817771</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1726308817771</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -253,7 +266,9 @@
     <MESSAGE value="Implement better resize and adjust Pen API" />
     <MESSAGE value="Improve layouts" />
     <MESSAGE value="Implement plugins + refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement plugins + refactor" />
+    <MESSAGE value="Move plugin loading to own class" />
+    <MESSAGE value="Move tool button setup to internal class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move tool button setup to internal class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -266,16 +281,6 @@
           <properties class="java.util.NoSuchElementException" package="java.util" />
           <option name="timeStamp" value="52" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java</url>
-          <line>309</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

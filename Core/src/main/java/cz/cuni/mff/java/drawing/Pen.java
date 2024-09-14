@@ -15,10 +15,6 @@ public abstract class Pen {
         this.settings = settings;
     }
 
-    public final boolean ready() {
-        return settings != null;
-    }
-
     public void mouseDragged(int x, int y, BufferedImage image) {}
     public void mouseMoved(int x, int y, BufferedImage image) {}
     public void mouseExited(int x, int y, BufferedImage image) {}

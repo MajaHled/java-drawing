@@ -1,6 +1,7 @@
 package cz.cuni.mff.java.drawing;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -23,23 +24,14 @@ public class PluginLoader {
         this.settings = settings;
     }
 
-    public void refreshPlugins() {
+    public void refreshPlugins() throws FileNotFoundException {
         try {
             // Reset buttons to default state
             buttonList.clear();
             buttonList.addAll(permanentList);
 
-            // Get URLs of all files in PLUGINS_DIR
-            ArrayList<URL> urls = new ArrayList<>();
-            //TODO deal with bad PLUGINS_DIR (throw exception and deal with in at call)
-            for (File file : Objects.requireNonNull(pluginsDir.listFiles())) {
-                urls.add(file.toURI().toURL());
-            }
-
-            // Get a classloader for all the loaded URLs
-            URL[] array = new URL[urls.size()];
-            urls.toArray(array);
-            URLClassLoader loader = new URLClassLoader(array);
+            // Prepare class loader
+            URLClassLoader loader = getUrlClassLoader();
 
             // Use the classloader in ServiceLoader to load all appropriate jars
             ServiceLoader<? extends Pen> sl = ServiceLoader.load(service, loader);
@@ -52,5 +44,21 @@ public class PluginLoader {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private URLClassLoader getUrlClassLoader() throws FileNotFoundException, MalformedURLException {
+        if (pluginsDir.listFiles() == null)
+            throw new FileNotFoundException(pluginsDir.getName() + " is not a directory.");
+
+        // Get URLs of all files in pluginsDir
+        ArrayList<URL> urls = new ArrayList<>();
+        for (File file : Objects.requireNonNull(pluginsDir.listFiles())) {
+            urls.add(file.toURI().toURL());
+        }
+
+        // Return classloader for all the loaded URLs
+        URL[] array = new URL[urls.size()];
+        urls.toArray(array);
+        return new URLClassLoader(array);
     }
 }

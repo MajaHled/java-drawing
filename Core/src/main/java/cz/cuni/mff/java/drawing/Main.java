@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,8 @@ public class Main {
     // Plugin setup
     private static final File PLUGINS_DIR = new File("Plugins");
     private static final PluginLoader shapeLoader = new PluginLoader(ShapePen.class, shapePenButtons, permanentShapePenButtons, PLUGINS_DIR, penSettings);
-    private static final PluginLoader penLoader = new PluginLoader(Pen.class, penButtons, permanentPenButtons, PLUGINS_DIR, penSettings);;
+    private static final PluginLoader penLoader = new PluginLoader(Pen.class, penButtons, permanentPenButtons, PLUGINS_DIR, penSettings);
+    ;
 
     private static void setupColorSelect(GridBagConstraints gbc) {
         colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
@@ -98,7 +100,7 @@ public class Main {
         strokePanel.setBorder(BorderFactory.createTitledBorder("Width Selection"));
 
         // Setting spinner size and edit settings
-        var editor = (JSpinner.DefaultEditor)strokeWidthSpinner.getEditor();
+        var editor = (JSpinner.DefaultEditor) strokeWidthSpinner.getEditor();
         editor.setPreferredSize(new Dimension(73, editor.getPreferredSize().height));
         editor.getTextField().setEditable(false);
 
@@ -198,7 +200,7 @@ public class Main {
                 JOptionPane.showMessageDialog(f,
                         "Could not save to file.",
                         "Error",
-                        JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
         });
 
         saveAsItem.addActionListener(_ -> {
@@ -223,19 +225,22 @@ public class Main {
 
     private static class ToolButtonSetup {
         private static void displayButtons(JPanel buttonPanel, List<PenButton> buttons) {
-            // Empty panel
-            for(Component c : buttonPanel.getComponents()) {
+            // Empty panel and tool group
+            for (Component c : buttonPanel.getComponents()) {
                 buttonPanel.remove(c);
+                toolSelectionGroup.remove((PenButton) c);
             }
 
-            // Setup button actions
             for (var b : buttons) {
-                b.setPreferredSize(new Dimension(b.getIconSize()+10, b.getIconSize()+10));
-                b.addActionListener (_ -> {
+                b.setPreferredSize(new Dimension(b.getIconSize() + 10, b.getIconSize() + 10));
+
+                // Setup button actions
+                b.addActionListener(_ -> {
                     panelSettings.currentPen.reset();
                     panelSettings.currentPen = b.pen;
                     b.pen.reset();
                 });
+
                 // Add to tool group and panel
                 toolSelectionGroup.add(b);
                 buttonPanel.add(b);
@@ -244,8 +249,9 @@ public class Main {
             buttonPanel.revalidate();
             buttonPanel.repaint();
         }
+
         private static void setupToolButtonPanel(JPanel buttonPanel, List<PenButton> buttons, String borderMessage, GridBagConstraints gbc) {
-            buttonPanel.setLayout(new GridLayout(Math.ceilDiv(buttons.size(),2), 2, 2, 2));
+            buttonPanel.setLayout(new GridLayout(Math.ceilDiv(buttons.size(), 2), 2, 2, 2));
             buttonPanel.setBorder(BorderFactory.createTitledBorder(borderMessage));
 
             displayButtons(buttonPanel, buttons);
@@ -254,29 +260,61 @@ public class Main {
         }
 
         public static void setupShapeButtons(GridBagConstraints gbc) {
-            // Create shape buttons
+            // Create permanent (non-plugin) shape buttons
             permanentShapePenButtons.add(new PenButton(new RectanglePen(penSettings)));
             permanentShapePenButtons.add(new PenButton(new CirclePen(penSettings)));
             permanentShapePenButtons.add(new PenButton(new LinePen(penSettings)));
 
-            shapeLoader.refreshPlugins();
+            // Put on panel
+            shapePenButtons.clear();
+            shapePenButtons.addAll(permanentShapePenButtons);
             setupToolButtonPanel(shapePanel, shapePenButtons, "Shape Selection", gbc);
         }
-        public static void setupPenButtons(GridBagConstraints gbc) {
-            // Create pen buttons
-            permanentPenButtons.add(new PenButton(new BasicPen(penSettings)));
-            //permanentPenButtons.add(new PenButton(new RainbowPen(penSettings)));
 
-            penLoader.refreshPlugins();
+        public static void setupPenButtons(GridBagConstraints gbc) {
+            // Create permanent (non-plugin) pen buttons
+            permanentPenButtons.add(new PenButton(new BasicPen(penSettings)));
+
+            // Put on panel
+            penButtons.clear();
+            penButtons.addAll(permanentPenButtons);
             setupToolButtonPanel(penPanel, penButtons, "Pen Selection", gbc);
         }
+
         public static void displayAllButtons() {
             displayButtons(penPanel, penButtons);
             displayButtons(shapePanel, shapePenButtons);
         }
+
+        public static void refreshAllPlugins(boolean alerts) {
+            if (PLUGINS_DIR.exists()) {
+                try {
+                    // Reload all plugins in the plugins directory
+                    penLoader.refreshPlugins();
+                    shapeLoader.refreshPlugins();
+                    ToolButtonSetup.displayAllButtons();
+
+                    // Select default pen
+                    penButtons.getFirst().doClick();
+                } catch (FileNotFoundException e) {
+                    if (alerts)
+                        JOptionPane.showMessageDialog(f,
+                                e.getMessage(),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                }
+
+            } else {
+                if (alerts)
+                    JOptionPane.showMessageDialog(f,
+                            "Plugins directory not found.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
-    private static void  createAndShowGUI() {
+    private static void createAndShowGUI() {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Prepare layouts
@@ -295,13 +333,7 @@ public class Main {
         setupStrokeSelect(gbc);
 
         refreshButton.addActionListener(_ -> {
-            if (PLUGINS_DIR.exists() && PLUGINS_DIR.isDirectory()) {
-                penLoader.refreshPlugins();
-                shapeLoader.refreshPlugins();
-                ToolButtonSetup.displayAllButtons();
-            } else {
-                //TODO deal
-            }
+            ToolButtonSetup.refreshAllPlugins(true);
         });
         gbc.gridy = 2;
         leftMenu.add(refreshButton, gbc);
@@ -310,6 +342,7 @@ public class Main {
         ToolButtonSetup.setupShapeButtons(gbc);
         gbc.gridy = 4;
         ToolButtonSetup.setupPenButtons(gbc);
+        ToolButtonSetup.refreshAllPlugins(false);
 
         // Set starting pen
         penButtons.getFirst().setSelected(true);
@@ -328,10 +361,8 @@ public class Main {
 //Plan:
 // make example plugins
 // Saving better and better size dialog
-// deal with missing plugins dir
 // shape plugins
 // deal with icon resizes
 // make Pen class check ready()
-// Reselect current pen if none selected ofter refresh
 // fix layouts
 // docs
