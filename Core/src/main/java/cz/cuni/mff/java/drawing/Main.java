@@ -369,6 +369,5 @@ public class Main {
 }
 
 //Plan:
-// make wave plugins
 // deal with icon resizes
 // docs

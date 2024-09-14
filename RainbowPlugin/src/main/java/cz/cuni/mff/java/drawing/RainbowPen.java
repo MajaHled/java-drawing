@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 import com.google.auto.service.AutoService;
 
+import javax.swing.*;
+
 @AutoService(Pen.class)
 public class RainbowPen extends Pen {
     private int lastX = 0;
