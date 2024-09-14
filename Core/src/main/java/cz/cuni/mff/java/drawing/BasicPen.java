@@ -3,15 +3,15 @@ package cz.cuni.mff.java.drawing;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class TestPen extends Pen {
+public class BasicPen extends Pen {
     private int lastX = 0;
     private int lastY = 0;
 
-    public TestPen(PenSettings settings) {
+    public BasicPen(PenSettings settings) {
         super(settings);
     }
 
-    public TestPen() {
+    public BasicPen() {
         super();
     }
 
