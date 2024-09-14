@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Deal with missing plugins dir">
+    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Make shape fill possible">
+      <change afterPath="$PROJECT_DIR$/RectFillPlugin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/ShapePen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/ShapePen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +62,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Marie Hledíková/IdeaProjects/drawing",
+    "last_opened_file_path": "C:/Users/Marie Hledíková/IdeaProjects/drawing/RectFillPlugin",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -74,9 +74,11 @@
       <recent name="cz.cuni.mff.java.hw.drawing" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\RectFillPlugin" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java\cz\cuni\mff\java\hw\drawing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\RectFillPlugin\src\main\java\cz\cuni\mff\java\drawing" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\Plugins" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\RainbowPlugin\src\main\java\cz\cuni\mff\java\hw\drawing" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java\cz\cuni\mff\java\hw\drawing" />
@@ -252,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726320275398</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Make shape fill possible">
+      <option name="closed" value="true" />
+      <created>1726320918956</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1726320918956</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -277,7 +287,8 @@
     <MESSAGE value="Move plugin loading to own class" />
     <MESSAGE value="Move tool button setup to internal class" />
     <MESSAGE value="Deal with missing plugins dir" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deal with missing plugins dir" />
+    <MESSAGE value="Make shape fill possible" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make shape fill possible" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

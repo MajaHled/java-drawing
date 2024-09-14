@@ -357,6 +357,5 @@ public class Main {
 //Plan:
 // make example plugins
 // Saving better and better size dialog
-// shape plugins
 // deal with icon resizes
 // docs

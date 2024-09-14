@@ -12,6 +12,7 @@
         <module>Core</module>
         <module>RainbowPlugin</module>
         <module>WavePlugin</module>
+        <module>RectFillPlugin</module>
     </modules>
 
     <properties>
