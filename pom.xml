@@ -11,6 +11,7 @@
     <modules>
         <module>Core</module>
         <module>RainbowPlugin</module>
+        <module>WavePlugin</module>
     </modules>
 
     <properties>

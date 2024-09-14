@@ -4,25 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Improve layouts">
-      <change afterPath="$PROJECT_DIR$/RainbowPlugin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Implement plugins + refactor">
+      <change afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WavePlugin/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WavePlugin/src/main/java/cz/cuni/mff/java/drawing/WavePen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/CirclePen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/DrawPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/DrawPanelSettings.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/LinePen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/Pen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/PenButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/PenSettings.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/PictureLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/RainbowPen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/RectanglePen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/ShapePen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cz/cuni/mff/java/hw/drawing/TestPen.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,21 +57,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Marie Hledíková/java/examles/java03/service-loader&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;debugger.hotswap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Marie Hledíková/IdeaProjects/drawing",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "debugger.hotswap"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="cz.cuni.mff.java.hw.drawing" />
@@ -91,10 +80,10 @@
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java\cz\cuni\mff\java\hw\drawing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\Plugins" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\RainbowPlugin\src\main\java\cz\cuni\mff\java\hw\drawing" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java\cz\cuni\mff\java\hw\drawing" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java" />
-      <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\Plugins" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -234,7 +223,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726243399326</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Implement plugins + refactor">
+      <option name="closed" value="true" />
+      <created>1726256486011</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1726256486011</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -255,7 +252,8 @@
     <MESSAGE value="Add better file manipulation" />
     <MESSAGE value="Implement better resize and adjust Pen API" />
     <MESSAGE value="Improve layouts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improve layouts" />
+    <MESSAGE value="Implement plugins + refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement plugins + refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -268,6 +266,16 @@
           <properties class="java.util.NoSuchElementException" package="java.util" />
           <option name="timeStamp" value="52" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java</url>
+          <line>309</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

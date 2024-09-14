@@ -18,8 +18,6 @@ public class Main {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 
-    private static final File PLUGINS_DIR = new File("Plugins");
-
     private static final JFrame f = new JFrame("Untitled*");
 
     // Settings classes
@@ -44,9 +42,10 @@ public class Main {
     private static final JSpinner strokeWidthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, null, 1));
 
     private static final ButtonGroup toolSelectionGroup = new ButtonGroup();
-    private static ArrayList<PenButton> penButtons = new ArrayList<>();
+    private static final ArrayList<PenButton> penButtons = new ArrayList<>();
     private static final ArrayList<PenButton> permanentPenButtons = new ArrayList<>();
     private static final ArrayList<PenButton> shapePenButtons = new ArrayList<>();
+    private static final ArrayList<PenButton> permanentShapePenButtons = new ArrayList<>();
 
     private static final JButton refreshButton = new JButton("Refresh");
 
@@ -66,6 +65,11 @@ public class Main {
     private static final JMenuItem openItem = new JMenuItem("Open...");
     private static final JMenuItem saveItem = new JMenuItem("Save...");
     private static final JMenuItem saveAsItem = new JMenuItem("Save as...");
+
+    // Plugin setup
+    private static final File PLUGINS_DIR = new File("Plugins");
+    private static final PluginLoader shapeLoader = new PluginLoader(ShapePen.class, shapePenButtons, permanentShapePenButtons, PLUGINS_DIR, penSettings);
+    private static final PluginLoader penLoader = new PluginLoader(Pen.class, penButtons, permanentPenButtons, PLUGINS_DIR, penSettings);;
 
     private static void setupColorSelect(GridBagConstraints gbc) {
         colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
@@ -141,10 +145,11 @@ public class Main {
 
     private static void setupShapeButtons(GridBagConstraints gbc) {
         // Create shape buttons
-        shapePenButtons.add(new PenButton(new RectanglePen(penSettings)));
-        shapePenButtons.add(new PenButton(new CirclePen(penSettings)));
-        shapePenButtons.add(new PenButton(new LinePen(penSettings)));
+        permanentShapePenButtons.add(new PenButton(new RectanglePen(penSettings)));
+        permanentShapePenButtons.add(new PenButton(new CirclePen(penSettings)));
+        permanentShapePenButtons.add(new PenButton(new LinePen(penSettings)));
 
+        shapeLoader.refreshPlugins();
         setupPenButtonPanel(shapePanel, shapePenButtons, "Shape Selection", gbc);
     }
 
@@ -153,7 +158,7 @@ public class Main {
         permanentPenButtons.add(new PenButton(new TestPen(penSettings)));
         //permanentPenButtons.add(new PenButton(new RainbowPen(penSettings)));
 
-        refreshPlugins();
+        penLoader.refreshPlugins();
         setupPenButtonPanel(penPanel, penButtons, "Pen Selection", gbc);
     }
 
@@ -268,34 +273,6 @@ public class Main {
         });
     }
 
-    private static void refreshPlugins() {
-        try {
-            // Reset buttons to default state
-            penButtons = new ArrayList<>(permanentPenButtons);
-
-            // Get URLs of all files in PLUGINS_DIR
-            ArrayList<URL> urls = new ArrayList<>();
-            for (File file : Objects.requireNonNull(PLUGINS_DIR.listFiles())) {
-                urls.add(file.toURI().toURL());
-            }
-
-            // Get a classloader for all the loaded URLs
-            URL[] array = new URL[urls.size()];
-            urls.toArray(array);
-            URLClassLoader loader = new URLClassLoader(array);
-
-            // Use the classloader in ServiceLoader to load all appropriate jars
-            ServiceLoader<Pen> sl = ServiceLoader.load(Pen.class, loader);
-
-            for (Pen plugin : sl) {
-                plugin.setSettings(penSettings);
-                penButtons.add(new PenButton(plugin));
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private static void  createAndShowGUI() {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -316,8 +293,10 @@ public class Main {
 
         refreshButton.addActionListener(_ -> {
             if (PLUGINS_DIR.exists() && PLUGINS_DIR.isDirectory()) {
-                refreshPlugins();
+                penLoader.refreshPlugins();
+                shapeLoader.refreshPlugins();
                 displayButtons(penPanel, penButtons);
+                displayButtons(shapePanel, shapePenButtons);
             } else {
                 //TODO deal
             }
@@ -345,8 +324,13 @@ public class Main {
 }
 
 //Plan:
-// add pen loading
 // make example plugins
 // Saving better and better size dialog
+// deal with missing plugins dir
+// make own internal class PluginLoader and move all the plugin bullshit there
+// shape plugins
+// deal with icon resizes
+// make Pen class check ready()
+// reset pens on file load/new
 // fix layouts
 // docs
