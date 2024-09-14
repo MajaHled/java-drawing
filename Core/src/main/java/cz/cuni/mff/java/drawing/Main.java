@@ -66,7 +66,6 @@ public class Main {
     private static final File PLUGINS_DIR = new File("Plugins");
     private static final PluginLoader shapeLoader = new PluginLoader(ShapePen.class, shapePenButtons, permanentShapePenButtons, PLUGINS_DIR, penSettings);
     private static final PluginLoader penLoader = new PluginLoader(Pen.class, penButtons, permanentPenButtons, PLUGINS_DIR, penSettings);
-    ;
 
     private static void setupColorSelect(GridBagConstraints gbc) {
         colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
@@ -293,9 +292,6 @@ public class Main {
                     penLoader.refreshPlugins();
                     shapeLoader.refreshPlugins();
                     ToolButtonSetup.displayAllButtons();
-
-                    // Select default pen
-                    penButtons.getFirst().doClick();
                 } catch (FileNotFoundException e) {
                     if (alerts)
                         JOptionPane.showMessageDialog(f,
@@ -303,7 +299,6 @@ public class Main {
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
                 }
-
             } else {
                 if (alerts)
                     JOptionPane.showMessageDialog(f,
@@ -334,6 +329,7 @@ public class Main {
 
         refreshButton.addActionListener(_ -> {
             ToolButtonSetup.refreshAllPlugins(true);
+            penButtons.getFirst().doClick();
         });
         gbc.gridy = 2;
         leftMenu.add(refreshButton, gbc);
@@ -363,6 +359,4 @@ public class Main {
 // Saving better and better size dialog
 // shape plugins
 // deal with icon resizes
-// make Pen class check ready()
-// fix layouts
 // docs

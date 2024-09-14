@@ -9,6 +9,8 @@ public abstract class ShapePen extends Pen {
     private int startY = 0;
     private WritableRaster origRaster;
 
+    protected boolean fill = false;
+
     public ShapePen(PenSettings settings) {
         super(settings);
     }
@@ -25,6 +27,12 @@ public abstract class ShapePen extends Pen {
 
         Graphics2D g = image.createGraphics();
         settings.setupGraphics2D(g);
+
+        if (fill) {
+            g.setColor(settings.backgroundColor);
+            g.fill(getShape(startX, startY, x, y));
+            g.setColor(settings.mainColor);
+        }
 
         g.draw(getShape(startX, startY, x, y));
     }

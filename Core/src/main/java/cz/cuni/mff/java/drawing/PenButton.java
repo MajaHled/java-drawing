@@ -17,7 +17,9 @@ public class PenButton extends JToggleButton {
             this.setIcon(icon);
         } else {
             int widthBackup = pen.settings.strokeWidth;
+            Color backgroudBackup = pen.settings.backgroundColor;
             pen.settings.strokeWidth = 3;
+            pen.settings.backgroundColor = Color.lightGray;
 
             var img = PictureLoader.NewImage(ICON_SIZE, ICON_SIZE, Color.WHITE);
 
@@ -31,6 +33,7 @@ public class PenButton extends JToggleButton {
             this.setIcon(new ImageIcon(img));
 
             pen.settings.strokeWidth = widthBackup;
+            pen.settings.backgroundColor = backgroudBackup;
         }
     }
 
