@@ -14,7 +14,7 @@ public class Main {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 
-    private static final JFrame f = new JFrame("Untitled*");
+    private static final JFrame f = new JFrame("Untitled");
 
     // Settings classes
     private static final DrawPanelSettings panelSettings = new DrawPanelSettings();
@@ -64,8 +64,8 @@ public class Main {
 
     // Plugin setup
     private static final File PLUGINS_DIR = new File("Plugins");
-    private static final PluginLoader shapeLoader = new PluginLoader(ShapePen.class, shapePenButtons, permanentShapePenButtons, PLUGINS_DIR, penSettings);
-    private static final PluginLoader penLoader = new PluginLoader(Pen.class, penButtons, permanentPenButtons, PLUGINS_DIR, penSettings);
+    private static final PluginLoader shapeLoader = new PluginLoader(ShapePen.class, shapePenButtons, permanentShapePenButtons, PLUGINS_DIR, penSettings, panelSettings);
+    private static final PluginLoader penLoader = new PluginLoader(Pen.class, penButtons, permanentPenButtons, PLUGINS_DIR, penSettings, panelSettings);
 
     private static void setupColorSelect(GridBagConstraints gbc) {
         colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
@@ -153,7 +153,7 @@ public class Main {
 
                 dp.setImage(PictureLoader.NewImage(x, y, panelSettings.backgroundColor));
                 saveFile = null;
-                f.setTitle("Untitled*");
+                f.setTitle("Untitled");
                 panelSettings.currentPen.reset();
             }
         });
@@ -223,22 +223,18 @@ public class Main {
     }
 
     private static class ToolButtonSetup {
-        private static void displayButtons(JPanel buttonPanel, List<PenButton> buttons) {
-            // Empty panel and tool group
+        private static void redisplayButtons(JPanel buttonPanel, List<PenButton> buttons) {
+            // Empty panel and remove from tool group
             for (Component c : buttonPanel.getComponents()) {
                 buttonPanel.remove(c);
                 toolSelectionGroup.remove((PenButton) c);
             }
 
+            // Adjust panel layout
+            buttonPanel.setLayout(new GridLayout(Math.ceilDiv(buttons.size(), 2), 2, 2, 2));
+
             for (var b : buttons) {
                 b.setPreferredSize(new Dimension(b.getIconSize() + 10, b.getIconSize() + 10));
-
-                // Setup button actions
-                b.addActionListener(_ -> {
-                    panelSettings.currentPen.reset();
-                    panelSettings.currentPen = b.pen;
-                    b.pen.reset();
-                });
 
                 // Add to tool group and panel
                 toolSelectionGroup.add(b);
@@ -250,10 +246,9 @@ public class Main {
         }
 
         private static void setupToolButtonPanel(JPanel buttonPanel, List<PenButton> buttons, String borderMessage, GridBagConstraints gbc) {
-            buttonPanel.setLayout(new GridLayout(Math.ceilDiv(buttons.size(), 2), 2, 2, 2));
             buttonPanel.setBorder(BorderFactory.createTitledBorder(borderMessage));
 
-            displayButtons(buttonPanel, buttons);
+            redisplayButtons(buttonPanel, buttons);
 
             leftMenu.add(buttonPanel, gbc);
         }
@@ -264,6 +259,15 @@ public class Main {
             permanentShapePenButtons.add(new PenButton(new CirclePen(penSettings)));
             permanentShapePenButtons.add(new PenButton(new LinePen(penSettings)));
 
+            // Setup button action
+            for (var b : permanentShapePenButtons) {
+                b.addActionListener(_ -> {
+                    panelSettings.currentPen.reset();
+                    panelSettings.currentPen = b.pen;
+                    b.pen.reset();
+                });
+            }
+
             // Put on panel
             shapePenButtons.clear();
             shapePenButtons.addAll(permanentShapePenButtons);
@@ -273,6 +277,16 @@ public class Main {
         public static void setupPenButtons(GridBagConstraints gbc) {
             // Create permanent (non-plugin) pen buttons
             permanentPenButtons.add(new PenButton(new BasicPen(penSettings)));
+            permanentPenButtons.add(new PenButton(new DoublePen(penSettings)));
+
+            // Setup button action
+            for (var b : permanentPenButtons) {
+                b.addActionListener(_ -> {
+                    panelSettings.currentPen.reset();
+                    panelSettings.currentPen = b.pen;
+                    b.pen.reset();
+                });
+            }
 
             // Put on panel
             penButtons.clear();
@@ -280,9 +294,9 @@ public class Main {
             setupToolButtonPanel(penPanel, penButtons, "Pen Selection", gbc);
         }
 
-        public static void displayAllButtons() {
-            displayButtons(penPanel, penButtons);
-            displayButtons(shapePanel, shapePenButtons);
+        public static void redisplayAllButtons() {
+            redisplayButtons(penPanel, penButtons);
+            redisplayButtons(shapePanel, shapePenButtons);
         }
 
         public static void refreshAllPlugins(boolean alerts) {
@@ -291,7 +305,7 @@ public class Main {
                     // Reload all plugins in the plugins directory
                     penLoader.refreshPlugins();
                     shapeLoader.refreshPlugins();
-                    ToolButtonSetup.displayAllButtons();
+                    redisplayAllButtons();
                 } catch (FileNotFoundException e) {
                     if (alerts)
                         JOptionPane.showMessageDialog(f,
@@ -355,7 +369,6 @@ public class Main {
 }
 
 //Plan:
-// make example plugins
-// Saving better and better size dialog
+// make wave plugins
 // deal with icon resizes
 // docs

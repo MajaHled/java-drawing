@@ -1,5 +1,6 @@
 package cz.cuni.mff.java.drawing;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
@@ -14,14 +15,16 @@ public class PluginLoader {
     private final List<PenButton> buttonList, permanentList;
     private final Class<? extends Pen> service;
     private final File pluginsDir;
-    private final PenSettings settings;
+    private final PenSettings penSettings;
+    private final DrawPanelSettings panelSettings;
 
-    public PluginLoader(Class<? extends Pen> service, ArrayList<PenButton> buttonList, ArrayList<PenButton> permanentList, File pluginsDir, PenSettings settings) {
+    public PluginLoader(Class<? extends Pen> service, ArrayList<PenButton> buttonList, ArrayList<PenButton> permanentList, File pluginsDir, PenSettings penSettings, DrawPanelSettings panelSettings) {
         this.buttonList = buttonList;
         this.permanentList = permanentList;
         this.service = service;
         this.pluginsDir = pluginsDir;
-        this.settings = settings;
+        this.penSettings = penSettings;
+        this.panelSettings = panelSettings;
     }
 
     public void refreshPlugins() throws FileNotFoundException {
@@ -38,8 +41,17 @@ public class PluginLoader {
 
             // Initialize all plugin pens and add to list of buttons
             for (Pen plugin : sl) {
-                plugin.setSettings(settings);
-                buttonList.add(new PenButton(plugin));
+                plugin.setSettings(penSettings);
+                PenButton b = new PenButton(plugin);
+
+                // Setup button action
+                b.addActionListener(_ -> {
+                    panelSettings.currentPen.reset();
+                    panelSettings.currentPen = b.pen;
+                    b.pen.reset();
+                });
+
+                buttonList.add(b);
             }
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);

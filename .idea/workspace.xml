@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Make shape fill possible">
-      <change afterPath="$PROJECT_DIR$/RectFillPlugin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Implement example shape fill plugin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +83,9 @@
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\RainbowPlugin\src\main\java\cz\cuni\mff\java\hw\drawing" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java\cz\cuni\mff\java\hw\drawing" />
       <recent name="C:\Users\Marie Hledíková\IdeaProjects\drawing\src\main\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cz.cuni.mff.java.drawing" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -262,7 +265,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726320918956</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Implement example shape fill plugin">
+      <option name="closed" value="true" />
+      <created>1726321396231</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1726321396231</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -288,7 +299,8 @@
     <MESSAGE value="Move tool button setup to internal class" />
     <MESSAGE value="Deal with missing plugins dir" />
     <MESSAGE value="Make shape fill possible" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make shape fill possible" />
+    <MESSAGE value="Implement example shape fill plugin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement example shape fill plugin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
