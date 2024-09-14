@@ -4,16 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Adjust layout and add Double pen">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Implement icon loading">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/BasicPen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/BasicPen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/CirclePen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/CirclePen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/DoublePen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/DoublePen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/LinePen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/LinePen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/RainbowPlugin-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/RainbowPlugin-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Pen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Pen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/RectanglePen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/RectanglePen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/ShapePen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/ShapePen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RainbowPlugin/src/main/java/cz/cuni/mff/java/drawing/RainbowPen.java" beforeDir="false" afterPath="$PROJECT_DIR$/RainbowPlugin/src/main/java/cz/cuni/mff/java/drawing/RainbowPen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WavePlugin/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WavePlugin/src/main/java/cz/cuni/mff/java/drawing/WavePen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RectFillPlugin/src/main/java/cz/cuni/mff/java/drawing/RectangleFillPen.java" beforeDir="false" afterPath="$PROJECT_DIR$/RectFillPlugin/src/main/java/cz/cuni/mff/java/drawing/RectangleFillPen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726323759024</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Implement icon loading">
+      <option name="closed" value="true" />
+      <created>1726325530375</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1726325530375</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -314,7 +324,8 @@
     <MESSAGE value="Make shape fill possible" />
     <MESSAGE value="Implement example shape fill plugin" />
     <MESSAGE value="Adjust layout and add Double pen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjust layout and add Double pen" />
+    <MESSAGE value="Implement icon loading" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement icon loading" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -3,6 +3,11 @@ package cz.cuni.mff.java.drawing;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * Concrete implementation of {@link ShapePen} for drawing circles and ellipses.
+ *
+ * @see ShapePen
+ */
 public class CirclePen extends ShapePen {
     @Override
     protected Shape getShape(int x1, int y1, int x2, int y2) {
@@ -10,9 +15,8 @@ public class CirclePen extends ShapePen {
     }
 
     public CirclePen(PenSettings settings) {
-        super(settings);
+        this.settings = settings;
     }
-    public CirclePen() {
-        super();
-    }
+
+    public CirclePen() { }
 }

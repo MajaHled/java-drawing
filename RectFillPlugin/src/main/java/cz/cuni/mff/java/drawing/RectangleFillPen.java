@@ -3,6 +3,12 @@ package cz.cuni.mff.java.drawing;
 import java.awt.*;
 import com.google.auto.service.AutoService;
 
+/**
+ * Concrete implementation of {@link ShapePen} for drawing filled rectangles.
+ *
+ * @see ShapePen
+ */
+
 @AutoService(ShapePen.class)
 public class RectangleFillPen extends ShapePen {
     @Override
@@ -11,7 +17,6 @@ public class RectangleFillPen extends ShapePen {
     }
 
     public RectangleFillPen() {
-        super();
         fill = true;
     }
 }

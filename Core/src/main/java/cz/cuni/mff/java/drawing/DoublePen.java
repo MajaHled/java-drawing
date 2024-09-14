@@ -8,12 +8,10 @@ public class DoublePen extends Pen {
     private int lastY = 0;
 
     public DoublePen(PenSettings settings) {
-        super(settings);
+        this.settings = settings;
     }
 
-    public DoublePen() {
-        super();
-    }
+    public DoublePen() { }
 
     @Override
     public void mousePressed(int x, int y, BufferedImage image) {
