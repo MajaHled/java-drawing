@@ -252,7 +252,6 @@ public class Main {
         });
     }
 
-    // todo
     private static class ToolButtonSetup {
         private static void redisplayButtons(JPanel buttonPanel, List<PenButton> buttons) {
             // Empty panel and remove from tool group
