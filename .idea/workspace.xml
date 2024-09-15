@@ -4,22 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Add javadoc for Pen classes">
+    <list default="true" id="e21c82d0-08be-48de-a178-5d1266bf3687" name="Changes" comment="Add javadoc for all classes">
+      <change afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/package-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/BasicPen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/BasicPen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/DoublePen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/DoublePen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/DrawPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/DrawPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/DrawPanelSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/DrawPanelSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PenSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PictureLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PictureLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/PluginLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/ShapePen.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/cz/cuni/mff/java/drawing/ShapePen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/RainbowPlugin-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/RectFillPlugin-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RainbowPlugin/src/main/java/cz/cuni/mff/java/drawing/RainbowPen.java" beforeDir="false" afterPath="$PROJECT_DIR$/RainbowPlugin/src/main/java/cz/cuni/mff/java/drawing/RainbowPen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RectFillPlugin/src/main/java/cz/cuni/mff/java/drawing/RectangleFillPen.java" beforeDir="false" afterPath="$PROJECT_DIR$/RectFillPlugin/src/main/java/cz/cuni/mff/java/drawing/RectangleFillPen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +18,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
@@ -308,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726346066181</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Add javadoc for all classes">
+      <option name="closed" value="true" />
+      <created>1726408826337</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1726408826337</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -338,7 +334,8 @@
     <MESSAGE value="Adjust layout and add Double pen" />
     <MESSAGE value="Implement icon loading" />
     <MESSAGE value="Add javadoc for Pen classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add javadoc for Pen classes" />
+    <MESSAGE value="Add javadoc for all classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add javadoc for all classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
