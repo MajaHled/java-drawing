@@ -5,7 +5,9 @@ import com.google.auto.service.AutoService;
 
 /**
  * Concrete implementation of {@link ShapePen} for drawing filled rectangles.
- *
+ * <p>
+ * This class is packaged into a {@link Pen} plugin using the {@link AutoService} annotation.
+ * </p>
  * @see ShapePen
  */
 

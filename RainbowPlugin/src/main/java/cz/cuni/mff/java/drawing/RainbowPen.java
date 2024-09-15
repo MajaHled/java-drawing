@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import com.google.auto.service.AutoService;
-//TODO test out once more without expl. constructor
 
 /**
  * An implementation of {@link Pen} for drawing a rainbow-colored stroke.
@@ -16,6 +15,9 @@ import com.google.auto.service.AutoService;
  * The pen's behavior is controlled by {@link PenSettings}, which determines the stoke width.
  * The color setting are ignored.
  * {@code PenSettings} must be provided using {@link #setSettings(PenSettings)} before use.
+ * </p>
+ * <p>
+ * This class is packaged into a {@link Pen} plugin using the {@link AutoService} annotation.
  * </p>
  *
  * @see Pen
@@ -36,9 +38,9 @@ public class RainbowPen extends Pen {
      *
      * @param x the x-coordinate of the mouse press
      * @param y the y-coordinate of the mouse press
-     * @param image the {@link BufferedImage} where drawing occurs
+     * @param image the {@link BufferedImage} to be drawn on
      *
-     * @throws IllegalStateException when the {@code ShapePen} is used before providing {@code PenSettings}
+     * @throws IllegalStateException when the {@code RainbowPen} is used before providing {@link PenSettings}
      */
     @Override
     public void mousePressed(int x, int y, BufferedImage image) {
@@ -66,9 +68,9 @@ public class RainbowPen extends Pen {
      *
      * @param x the x-coordinate of the current mouse position
      * @param y the y-coordinate of the current mouse position
-     * @param image the {@link BufferedImage} where drawing occurs
+     * @param image the {@link BufferedImage} to be drawn on
      *
-     * @throws IllegalStateException when the {@code ShapePen} is used before providing {@code PenSettings}
+     * @throws IllegalStateException when the {@code RainbowPen} is used before providing {@link PenSettings}
      */
     @Override
     public void mouseDragged(int x, int y, BufferedImage image) {
@@ -96,7 +98,7 @@ public class RainbowPen extends Pen {
      *
      * @param x the x-coordinate of the mouse release
      * @param y the y-coordinate of the mouse release
-     * @param image the {@link BufferedImage} where drawing occurs
+     * @param image the {@link BufferedImage} to be drawn on
      */
     @Override
     public void mouseReleased(int x, int y, BufferedImage image) {

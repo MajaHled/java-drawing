@@ -17,7 +17,7 @@ import java.awt.image.WritableRaster;
  * filling of the shape.
  * </p>
  * <p>
- * The outline of the shape is rendered using the stroke with and main color defined in the {@code settings}
+ * The outline of the shape is rendered using the stroke width and main color defined in the {@code settings}
  * field. The fill, if turned on, is done using the {@code backgroundColor}.
  * Filling behavior can be turned on by setting the {@link #fill} field to {@code true} in the constructor.
  * </p>
@@ -48,7 +48,7 @@ public abstract class ShapePen extends Pen {
     protected boolean fill = false;
 
     /**
-     * Returns the {@link java.awt.Shape} that will be drawn by this {@code ShapePen}, based on the given coordinates.
+     * Should return the {@link java.awt.Shape} that will be drawn by this {@code ShapePen}, based on the given coordinates.
      * <p>
      * This method must be implemented by subclasses to define the specific {@link java.awt.Shape}
      * that will be drawn. The shape should be situated between the start point (x1, y1)
@@ -82,7 +82,7 @@ public abstract class ShapePen extends Pen {
      * @param y the y-coordinate of the mouse
      * @param image the {@link BufferedImage} to be drawn on
      *
-     * @throws IllegalStateException when the {@code ShapePen} is used before providing {@code PenSettings}
+     * @throws IllegalStateException when the {@code ShapePen} is used before providing {@link PenSettings}
      *
      * @see PenSettings
      */

@@ -9,11 +9,22 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Main class of the application.
+ * <p>
+ * Creates the GUI and all the class instances needed for the functioning
+ * of the application and links them together using events.
+ * </p>
+ */
 public class Main {
+    /**
+     * Entry point of the application.
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 
+    // Main window
     private static final JFrame f = new JFrame("Untitled");
 
     // Settings classes
@@ -32,18 +43,25 @@ public class Main {
     private static final JPanel shapePanel = new JPanel();
     private static final JPanel penPanel = new JPanel();
 
-    // Buttons and ButtonGroups
+    // Buttons to configure the settings with
     private static final JButton selectMainColorButton = new JButton("Main color..");
     private static final JButton selectBackgroundColorButton = new JButton("Back color..");
     private static final JSpinner strokeWidthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, null, 1));
 
+    // Buttons for pen selection
     private static final ButtonGroup toolSelectionGroup = new ButtonGroup();
     private static final ArrayList<PenButton> penButtons = new ArrayList<>();
     private static final ArrayList<PenButton> permanentPenButtons = new ArrayList<>();
     private static final ArrayList<PenButton> shapePenButtons = new ArrayList<>();
     private static final ArrayList<PenButton> permanentShapePenButtons = new ArrayList<>();
 
+    // Button to refresh plugins
     private static final JButton refreshButton = new JButton("Refresh");
+
+    // Plugin setup
+    private static final File PLUGINS_DIR = new File("Plugins");
+    private static final PluginLoader shapeLoader = new PluginLoader(ShapePen.class, shapePenButtons, permanentShapePenButtons, PLUGINS_DIR, penSettings, panelSettings);
+    private static final PluginLoader penLoader = new PluginLoader(Pen.class, penButtons, permanentPenButtons, PLUGINS_DIR, penSettings, panelSettings);
 
     // File open and save options
     private static final JFileChooser fileDialog = new JFileChooser();
@@ -54,7 +72,7 @@ public class Main {
     private static JFormattedTextField xField;
     private static JFormattedTextField yField;
 
-    // Menu bar
+    // Menu bar for file handling
     private static final JMenuBar menuBar = new JMenuBar();
     private static final JMenu fileMenu = new JMenu("File...");
     private static final JMenuItem newItem = new JMenuItem("New...");
@@ -62,11 +80,12 @@ public class Main {
     private static final JMenuItem saveItem = new JMenuItem("Save...");
     private static final JMenuItem saveAsItem = new JMenuItem("Save as...");
 
-    // Plugin setup
-    private static final File PLUGINS_DIR = new File("Plugins");
-    private static final PluginLoader shapeLoader = new PluginLoader(ShapePen.class, shapePenButtons, permanentShapePenButtons, PLUGINS_DIR, penSettings, panelSettings);
-    private static final PluginLoader penLoader = new PluginLoader(Pen.class, penButtons, permanentPenButtons, PLUGINS_DIR, penSettings, panelSettings);
-
+    /**
+     * Sets up the color selection menu and adds it to the {@code leftMenu} using
+     * the specified constraints.
+     *
+     * @param gbc constraints to be used in laying out the menu
+     */
     private static void setupColorSelect(GridBagConstraints gbc) {
         colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
         colorPanel.setBorder(BorderFactory.createTitledBorder("Color Selection"));
@@ -95,6 +114,12 @@ public class Main {
         leftMenu.add(colorPanel, gbc);
     }
 
+    /**
+     * Sets up the stroke width selection menu and adds it to the {@code leftMenu} using
+     * the specified constraints.
+     *
+     * @param gbc constraints to be used in laying out the menu
+     */
     private static void setupStrokeSelect(GridBagConstraints gbc) {
         strokePanel.setBorder(BorderFactory.createTitledBorder("Width Selection"));
 
@@ -109,7 +134,11 @@ public class Main {
         leftMenu.add(strokePanel, gbc);
     }
 
+    /**
+     * Sets up the top file menu with the file handling actions.
+     */
     private static void setupFileMenu() {
+        // Add all the menus
         menuBar.add(fileMenu);
         fileMenu.add(newItem);
         fileMenu.add(openItem);
@@ -117,10 +146,10 @@ public class Main {
         fileMenu.add(saveAsItem);
         f.setJMenuBar(menuBar);
 
+        // Set the extension filter of the file dialog window to match the PictureLoader's supported files
         fileDialog.setFileFilter(PictureLoader.GetFileExtensionFilter());
 
-        // Size picker for New... menu
-        // Setup format of text fields
+        // Set up the size picker for New... menu
         NumberFormatter formatter = new NumberFormatter(NumberFormat.getInstance());
         formatter.setValueClass(Integer.class);
         formatter.setMinimum(0);
@@ -134,12 +163,13 @@ public class Main {
         yField.setColumns(5);
         yField.setText("250");
 
-        // Add textboxes
         canvasSizeOptions.add(new JLabel("Width:"));
         canvasSizeOptions.add(xField);
         canvasSizeOptions.add(Box.createHorizontalStrut(15)); // a spacer
         canvasSizeOptions.add(new JLabel("Height:"));
         canvasSizeOptions.add(yField);
+
+        // Set up the file actions for the menu
 
         newItem.addActionListener(_ -> {
             int result = JOptionPane.showConfirmDialog(null, canvasSizeOptions,
@@ -222,6 +252,7 @@ public class Main {
         });
     }
 
+    // todo
     private static class ToolButtonSetup {
         private static void redisplayButtons(JPanel buttonPanel, List<PenButton> buttons) {
             // Empty panel and remove from tool group
@@ -323,17 +354,23 @@ public class Main {
         }
     }
 
+    /**
+     * Creates the window of the application, all the class instances needed for the functioning
+     * of the app and links them together.
+     */
     private static void createAndShowGUI() {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Prepare layouts
+        // Prepare the layouts
         f.setLayout(new BorderLayout(1, 1));
+        leftMenu.setLayout(new GridBagLayout());
+        f.add(new JScrollPane(leftMenu), BorderLayout.WEST);
+
+        // Lay out draw panel
         dp.setScrollPane(scrollPaneDP);
         f.add(scrollPaneDP, BorderLayout.CENTER);
 
-        leftMenu.setLayout(new GridBagLayout());
-
-        // Setup of controls
+        // Set up controls in the left menu using GridBagLayout
         var gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -341,6 +378,7 @@ public class Main {
         gbc.gridy = 1;
         setupStrokeSelect(gbc);
 
+        // Set up the refresh button
         refreshButton.addActionListener(_ -> {
             ToolButtonSetup.refreshAllPlugins(true);
             penButtons.getFirst().doClick();
@@ -352,6 +390,8 @@ public class Main {
         ToolButtonSetup.setupShapeButtons(gbc);
         gbc.gridy = 4;
         ToolButtonSetup.setupPenButtons(gbc);
+
+        // Attempt to load plugins
         ToolButtonSetup.refreshAllPlugins(false);
 
         // Set starting pen
@@ -360,15 +400,8 @@ public class Main {
 
         setupFileMenu();
 
-        f.add(new JScrollPane(leftMenu), BorderLayout.WEST);
-
         f.pack();
         f.setSize(600, 500);
         f.setVisible(true);
     }
 }
-
-//Plan:
-// deal with icon resizes
-// retest
-// docs

@@ -36,9 +36,9 @@ public class BasicPen extends Pen {
      *
      * @param x the x-coordinate of the mouse press
      * @param y the y-coordinate of the mouse press
-     * @param image the {@link BufferedImage} where drawing occurs
+     * @param image the {@link BufferedImage} to be drawn on
      *
-     * @throws IllegalStateException when the {@code ShapePen} is used before providing {@code PenSettings}
+     * @throws IllegalStateException when the {@code BasicPen} is used before providing {@link PenSettings}
      */
     @Override
     public void mousePressed(int x, int y, BufferedImage image) {
@@ -63,9 +63,9 @@ public class BasicPen extends Pen {
      *
      * @param x the x-coordinate of the current mouse position
      * @param y the y-coordinate of the current mouse position
-     * @param image the {@link BufferedImage} where drawing occurs
+     * @param image the {@link BufferedImage} to be drawn on
      *
-     * @throws IllegalStateException when the {@code ShapePen} is used before providing {@code PenSettings}
+     * @throws IllegalStateException when the {@code BasicPen} is used before providing {@link PenSettings}
      */
     @Override
     public void mouseDragged(int x, int y, BufferedImage image) {
@@ -89,7 +89,7 @@ public class BasicPen extends Pen {
      *
      * @param x the x-coordinate of the mouse release
      * @param y the y-coordinate of the mouse release
-     * @param image the {@link BufferedImage} where drawing occurs
+     * @param image the {@link BufferedImage} to be drawn on
      */
     @Override
     public void mouseReleased(int x, int y, BufferedImage image) {
